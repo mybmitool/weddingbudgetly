@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="../favicon.ico">
+<title>DIY Savings Calculator | Wedding Budgetly</title>
+<meta name="description" content="Compare DIY vs professional costs for wedding invitations, flowers, cake, and decor. See your actual hourly savings.">
+<meta property="og:title" content="DIY Savings Calculator | Wedding Budgetly">
+<meta property="og:description" content="Compare DIY vs professional wedding costs with hourly rate analysis.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://weddingbudgetly.com/tools/diy-savings-calculator.html">
+<meta property="og:image" content="https://weddingbudgetly.com/images/og-default.jpg">
+<link rel="canonical" href="https://weddingbudgetly.com/tools/diy-savings-calculator.html">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"DIY Savings Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Web Browser","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+</head>
+<body>
+<nav class="wbl-nav">
+  <div class="wbl-nav-container">
+    <a href="../index.html" class="wbl-logo">Wedding<span>Budgetly</span></a>
+    <button class="wbl-nav-toggle" onclick="document.querySelector('.wbl-nav-links').classList.toggle('active')" aria-label="Toggle menu">&#9776;</button>
+    <ul class="wbl-nav-links">
+      <li><a href="../index.html">Home</a></li><li><a href="./index.html">Tools</a></li><li><a href="../blog/index.html">Blog</a></li><li><a href="../about.html">About</a></li><li><a href="../contact.html">Contact</a></li><li><a href="../faq.html">FAQ</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="wbl-tool-hero" style="background:linear-gradient(135deg,#E74C3C,#F39C12);">
+  <h1>DIY Savings Calculator</h1>
+  <p>Compare DIY vs professional costs for invitations, flowers, cake, and decor. See if your time is worth it.</p>
+</div>
+
+<div class="wbl-ad-slot" id="article_top" data-ad-slot="article_top"></div>
+
+<div class="wbl-tool-container">
+<div class="wbl-tool-intro" style="max-width:900px;margin:0 auto;padding:32px 24px 16px;">
+  <h2 style="font-size:1.4rem;color:var(--wbl-secondary);margin-bottom:12px;">How the DIY Savings Calculator Works</h2>
+  <p>This <strong>DIY wedding savings calculator</strong> answers the question every Pinterest-scrolling bride asks: <strong>is DIY actually cheaper?</strong> For each project—invitations, flowers, cake, decor, favors, signage—you enter the professional quote, your DIY material cost, and the hours you will spend. The tool computes your real hourly savings rate and gives a verdict: "Worth It!" if you are saving $50+ per hour, "Maybe" for $20–$50, or "Not Worth It" below that. <strong>Practical tip:</strong> most couples overestimate their DIY savings because they forget to count time, tool rentals, and failed attempts. A $500 professional cake vs. $80 in ingredients sounds like a $420 win, but if it takes you 12 hours and you are not a baker, your hourly rate drops to $35—and that is before stress. Add unlimited projects, compare them all in one bar chart, and export the full analysis so you can decide where to DIY and where to hire a pro.</p>
+  <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;">
+    <span style="background:var(--wbl-bg);padding:4px 10px;border-radius:12px;font-size:0.75rem;color:var(--wbl-text-light);">💡 DIY wedding savings calculator</span>
+    <span style="background:var(--wbl-bg);padding:4px 10px;border-radius:12px;font-size:0.75rem;color:var(--wbl-text-light);">💡 how much can I save DIY wedding</span>
+    <span style="background:var(--wbl-bg);padding:4px 10px;border-radius:12px;font-size:0.75rem;color:var(--wbl-text-light);">💡 DIY vs professional wedding cost</span>
+    <span style="background:var(--wbl-bg);padding:4px 10px;border-radius:12px;font-size:0.75rem;color:var(--wbl-text-light);">💡 is DIY wedding cheaper</span>
+  </div>
+</div>
+  <div class="wbl-tool-panel">
+    <div id="diyItems">
+      <div class="diy-item" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:20px;padding:20px;background:var(--wbl-bg);border-radius:var(--wbl-radius);">
+        <div class="wbl-form-group">
+          <label class="wbl-label">Project</label>
+          <select class="wbl-select project-type" onchange="calculateDIY()">
+            <option value="invitations">Invitations</option>
+            <option value="flowers">Flowers</option>
+            <option value="cake">Wedding Cake</option>
+            <option value="decor">Centerpieces / Decor</option>
+            <option value="favors">Wedding Favors</option>
+            <option value="signage">Welcome Signs / Seating Chart</option>
+            <option value="hair">Hair & Makeup</option>
+            <option value="video">Photo Booth / Video</option>
+          </select>
+        </div>
+        <div class="wbl-form-group">
+          <label class="wbl-label">Professional Cost ($)</label>
+          <input type="number" class="wbl-input pro-cost" value="500" min="0" step="25" onchange="calculateDIY()">
+        </div>
+        <div class="wbl-form-group">
+          <label class="wbl-label">DIY Materials ($)</label>
+          <input type="number" class="wbl-input diy-cost" value="120" min="0" step="10" onchange="calculateDIY()">
+        </div>
+        <div class="wbl-form-group">
+          <label class="wbl-label">Hours Needed</label>
+          <input type="number" class="wbl-input diy-hours" value="5" min="0" step="0.5" onchange="calculateDIY()">
+        </div>
+        <div class="wbl-form-group">
+          <label class="wbl-label">Skill Level</label>
+          <select class="wbl-select skill-level" onchange="calculateDIY()">
+            <option value="1.0">Beginner</option>
+            <option value="0.8">Intermediate</option>
+            <option value="0.6">Expert</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="wbl-tool-actions">
+      <button class="wbl-btn wbl-btn-primary" onclick="addDIYItem()">+ Add Project</button>
+      <button class="wbl-btn wbl-btn-secondary" onclick="saveDIY()">Save All</button>
+      <button class="wbl-btn wbl-btn-secondary" onclick="exportDIY()">Export</button>
+      <button class="wbl-btn wbl-btn-outline" onclick="resetDIY()">Reset</button>
+    </div>
+  </div>
+
+  <div class="wbl-tool-result" id="resultPanel">
+    <h3>DIY Analysis</h3>
+    <div class="wbl-chart-container">
+      <canvas id="diyChart"></canvas>
+    </div>
+    <div id="diyTable" style="margin-top:16px;"></div>
+    <div id="diySummary" style="margin-top:16px;padding:16px;border-radius:var(--wbl-radius-sm);font-size:1.1rem;font-weight:600;text-align:center;"></div>
+  </div>
+
+  <div class="wbl-tool-result" id="savedDIY" style="display:none;">
+    <h3>Saved Projects</h3>
+    <div id="savedList"></div>
+  </div>
+</div>
+
+<div class="wbl-ad-slot" id="article_bottom" data-ad-slot="article_bottom"></div>
+
+<div class="wbl-container" style="margin-top:48px;margin-bottom:48px;">
+  <div class="wbl-tail-grid">
+    <div class="wbl-tail-col">
+      <h3>Related Articles</h3>
+      <div class="wbl-tail-card"><a href="../blog/diy-wedding-flowers-fresh-vs-silk-vs-local-2026-cost-guide.html">DIY Wedding Flowers Guide</a><p>Fresh vs silk vs local — the 2026 cost breakdown.</p></div>
+      <div class="wbl-tail-card"><a href="../blog/diy-wedding-cake-storebought-homemade-or-professional.html">DIY Wedding Cake</a><p>Store-bought, homemade, or professional?</p></div>
+      <div class="wbl-tail-card"><a href="../blog/inspiration-spending-when-pinterest-becomes-your-financial-enemy.html">Inspiration Spending</a><p>When DIY becomes a financial trap.</p></div>
+    </div>
+    <div class="wbl-tail-col">
+      <h3>Recommended Tools</h3>
+      <div class="wbl-tail-card"><a href="./wedding-budget-calculator.html">Budget Calculator</a><p>Fit DIY savings into your total budget.</p></div>
+      <div class="wbl-tail-card"><a href="./per-guest-cost-estimator.html">Per-Guest Estimator</a><p>See per-person impact of DIY choices.</p></div>
+      <div class="wbl-tail-card"><a href="./wedding-savings-tracker.html">Savings Tracker</a><p>Track money saved from DIY projects.</p></div>
+    </div>
+  </div>
+</div>
+
+<footer class="wbl-footer">
+  <div class="wbl-container">
+    <div class="wbl-footer-grid">
+      <div><h4>Wedding Budgetly</h4><p style="font-size:0.9rem;">Smart tools and honest advice.</p></div>
+      <div><h4>Tools</h4><ul><li><a href="./diy-savings-calculator.html">DIY Savings</a></li><li><a href="./wedding-budget-calculator.html">Budget Calculator</a></li><li><a href="./per-guest-cost-estimator.html">Per-Guest Estimator</a></li></ul></div>
+      <div><h4>Navigate</h4><ul><li><a href="../index.html">Home</a></li><li><a href="./index.html">Tools</a></li><li><a href="../blog/index.html">Blog</a></li></ul></div>
+      <div><h4>Legal</h4><ul><li><a href="../privacy.html">Privacy</a></li><li><a href="../terms.html">Terms</a></li></ul></div>
+    </div>
+    <div class="wbl-footer-bottom"><p>&copy; 2024-2026 Wedding Budgetly. All rights reserved.</p></div>
+  </div>
+</footer>
+
+<script src="../ads-loader.js"></script>
+<script>
+const projectNames = {invitations:'Invitations',flowers:'Flowers',cake:'Wedding Cake',decor:'Centerpieces / Decor',favors:'Wedding Favors',signage:'Welcome Signs',hair:'Hair & Makeup',video:'Photo Booth / Video'};
+
+function calculateDIY() {
+  const items = document.querySelectorAll('.diy-item');
+  const data = [];
+  let totalSavings = 0;
+  let totalHours = 0;
+
+  items.forEach(item => {
+    const type = item.querySelector('.project-type').value;
+    const pro = parseFloat(item.querySelector('.pro-cost').value) || 0;
+    const diy = parseFloat(item.querySelector('.diy-cost').value) || 0;
+    const hours = parseFloat(item.querySelector('.diy-hours').value) || 0;
+    const skill = parseFloat(item.querySelector('.skill-level').value) || 1.0;
+    const adjustedHours = hours * skill;
+    const savings = pro - diy;
+    const hourlyRate = adjustedHours > 0 ? savings / adjustedHours : 0;
+    const verdict = hourlyRate >= 50 ? 'Worth It!' : hourlyRate >= 20 ? 'Maybe' : 'Not Worth It';
+    const color = hourlyRate >= 50 ? '#27AE60' : hourlyRate >= 20 ? '#F39C12' : '#E74C3C';
+
+    data.push({name:projectNames[type]||type, pro, diy, savings, hours:adjustedHours, hourlyRate, verdict, color});
+    totalSavings += savings;
+    totalHours += adjustedHours;
+  });
+
+  drawDIYChart(data);
+  buildDIYTable(data, totalSavings, totalHours);
+
+  const summary = document.getElementById('diySummary');
+  summary.style.background = totalSavings > 0 ? '#EAFAF1' : '#FEF9E7';
+  summary.style.color = totalSavings > 0 ? '#145A32' : '#7D6608';
+  summary.textContent = 'Total DIY Savings: $'+totalSavings.toLocaleString()+' | Total Hours: '+totalHours.toFixed(1)+' | Effective Hourly Rate: $'+(totalHours>0?(totalSavings/totalHours).toFixed(0):0)+'/hr';
+}
+
+function drawDIYChart(data) {
+  const canvas = document.getElementById('diyChart');
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.parentElement.getBoundingClientRect();
+  canvas.width = rect.width * dpr;
+  canvas.height = 280 * dpr;
+  ctx.scale(dpr, dpr);
+
+  ctx.clearRect(0, 0, rect.width, 280);
+  const maxVal = Math.max(...data.map(d=>Math.max(d.pro,d.diy)));
+  const barWidth = (rect.width - 80) / data.length;
+
+  data.forEach((d, i) => {
+    const proH = (d.pro / maxVal) * 150;
+    const diyH = (d.diy / maxVal) * 150;
+    const x = 40 + i * barWidth + barWidth * 0.1;
+
+    ctx.fillStyle = '#C0395B';
+    ctx.fillRect(x, 180 - proH, barWidth * 0.35, proH);
+    ctx.fillStyle = '#27AE60';
+    ctx.fillRect(x + barWidth * 0.4, 180 - diyH, barWidth * 0.35, diyH);
+
+    ctx.fillStyle = '#333';
+    ctx.font = '10px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(d.name.substring(0,10), x + barWidth * 0.35, 200);
+  });
+
+  ctx.fillStyle = '#C0395B';
+  ctx.fillRect(20, 20, 12, 12);
+  ctx.fillStyle = '#333';
+  ctx.font = '12px sans-serif';
+  ctx.fillText('Professional', 38, 30);
+  ctx.fillStyle = '#27AE60';
+  ctx.fillRect(120, 20, 12, 12);
+  ctx.fillStyle = '#333';
+  ctx.fillText('DIY', 138, 30);
+}
+
+function buildDIYTable(data, totalSavings, totalHours) {
+  let html = '<table class="wbl-table"><thead><tr><th>Project</th><th>Pro Cost</th><th>DIY Cost</th><th>Savings</th><th>Hours</th><th>$/Hour</th><th>Verdict</th></tr></thead><tbody>';
+  data.forEach(d => {
+    html += '<tr><td>'+d.name+'</td><td>$'+d.pro.toLocaleString()+'</td><td>$'+d.diy.toLocaleString()+'</td><td>$'+d.savings.toLocaleString()+'</td><td>'+d.hours.toFixed(1)+'</td><td>$'+d.hourlyRate.toFixed(0)+'</td><td style="color:'+d.color+';">'+d.verdict+'</td></tr>';
+  });
+  html += '<tr style="font-weight:700;background:var(--wbl-bg);"><td>Total</td><td></td><td></td><td>$'+totalSavings.toLocaleString()+'</td><td>'+totalHours.toFixed(1)+'</td><td>$'+(totalHours>0?(totalSavings/totalHours).toFixed(0):0)+'</td><td></td></tr>';
+  html += '</tbody></table>';
+  document.getElementById('diyTable').innerHTML = html;
+}
+
+function addDIYItem() {
+  const container = document.getElementById('diyItems');
+  const div = document.createElement('div');
+  div.className = 'diy-item';
+  div.style.cssText = 'display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:20px;padding:20px;background:var(--wbl-bg);border-radius:var(--wbl-radius);';
+  div.innerHTML = '<div class="wbl-form-group"><label class="wbl-label">Project</label><select class="wbl-select project-type" onchange="calculateDIY()"><option value="invitations">Invitations</option><option value="flowers">Flowers</option><option value="cake">Wedding Cake</option><option value="decor">Centerpieces / Decor</option><option value="favors">Wedding Favors</option><option value="signage">Welcome Signs</option><option value="hair">Hair & Makeup</option><option value="video">Photo Booth / Video</option></select></div><div class="wbl-form-group"><label class="wbl-label">Professional Cost ($)</label><input type="number" class="wbl-input pro-cost" value="500" min="0" step="25" onchange="calculateDIY()"></div><div class="wbl-form-group"><label class="wbl-label">DIY Materials ($)</label><input type="number" class="wbl-input diy-cost" value="120" min="0" step="10" onchange="calculateDIY()"></div><div class="wbl-form-group"><label class="wbl-label">Hours Needed</label><input type="number" class="wbl-input diy-hours" value="5" min="0" step="0.5" onchange="calculateDIY()"></div><div class="wbl-form-group"><label class="wbl-label">Skill Level</label><select class="wbl-select skill-level" onchange="calculateDIY()"><option value="1.0">Beginner</option><option value="0.8">Intermediate</option><option value="0.6">Expert</option></select></div><div class="wbl-form-group" style="display:flex;align-items:flex-end;"><button class="wbl-btn wbl-btn-outline wbl-btn-sm" onclick="this.parentElement.parentElement.remove();calculateDIY();">Remove</button></div>';
+  container.appendChild(div);
+  calculateDIY();
+}
+
+function saveDIY() {
+  const items = document.querySelectorAll('.diy-item');
+  const data = [];
+  items.forEach(item => {
+    data.push({
+      type: item.querySelector('.project-type').value,
+      pro: item.querySelector('.pro-cost').value,
+      diy: item.querySelector('.diy-cost').value,
+      hours: item.querySelector('.diy-hours').value,
+      skill: item.querySelector('.skill-level').value
+    });
+  });
+  localStorage.setItem('wbl_diy', JSON.stringify(data));
+  alert('Projects saved!');
+  showSaved();
+}
+
+function showSaved() {
+  const saved = JSON.parse(localStorage.getItem('wbl_diy') || '[]');
+  if (saved.length === 0) return;
+  document.getElementById('savedDIY').style.display = 'block';
+  let html = '<table class="wbl-table"><thead><tr><th>Project</th><th>Pro</th><th>DIY</th><th>Hours</th></tr></thead><tbody>';
+  saved.forEach((s, i) => {
+    html += '<tr><td>'+(projectNames[s.type]||s.type)+'</td><td>$'+s.pro+'</td><td>$'+s.diy+'</td><td>'+s.hours+'</td></tr>';
+  });
+  html += '</tbody></table>';
+  document.getElementById('savedList').innerHTML = html;
+}
+
+function exportDIY() {
+  const items = document.querySelectorAll('.diy-item');
+  let text = 'DIY SAVINGS ANALYSIS\nGenerated by Wedding Budgetly\n\n';
+  items.forEach(item => {
+    const type = item.querySelector('.project-type').value;
+    const pro = item.querySelector('.pro-cost').value;
+    const diy = item.querySelector('.diy-cost').value;
+    const hours = item.querySelector('.diy-hours').value;
+    text += (projectNames[type]||type)+': Pro $'+pro+' vs DIY $'+diy+' ('+hours+' hrs)\n';
+  });
+  const blob = new Blob([text], {type:'text/plain'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'diy-analysis.txt';
+  a.click();
+}
+
+function resetDIY() {
+  document.getElementById('diyItems').innerHTML = '<div class="diy-item" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:20px;padding:20px;background:var(--wbl-bg);border-radius:var(--wbl-radius);"><div class="wbl-form-group"><label class="wbl-label">Project</label><select class="wbl-select project-type" onchange="calculateDIY()"><option value="invitations">Invitations</option><option value="flowers">Flowers</option><option value="cake">Wedding Cake</option><option value="decor">Centerpieces / Decor</option><option value="favors">Wedding Favors</option><option value="signage">Welcome Signs</option><option value="hair">Hair & Makeup</option><option value="video">Photo Booth / Video</option></select></div><div class="wbl-form-group"><label class="wbl-label">Professional Cost ($)</label><input type="number" class="wbl-input pro-cost" value="500" min="0" step="25" onchange="calculateDIY()"></div><div class="wbl-form-group"><label class="wbl-label">DIY Materials ($)</label><input type="number" class="wbl-input diy-cost" value="120" min="0" step="10" onchange="calculateDIY()"></div><div class="wbl-form-group"><label class="wbl-label">Hours Needed</label><input type="number" class="wbl-input diy-hours" value="5" min="0" step="0.5" onchange="calculateDIY()"></div><div class="wbl-form-group"><label class="wbl-label">Skill Level</label><select class="wbl-select skill-level" onchange="calculateDIY()"><option value="1.0">Beginner</option><option value="0.8">Intermediate</option><option value="0.6">Expert</option></select></div></div>';
+  calculateDIY();
+}
+
+calculateDIY();
+showSaved();
+</script>
+</body>
+</html>
