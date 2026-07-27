@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://weddingbudgetly.com/sitemap.xml
