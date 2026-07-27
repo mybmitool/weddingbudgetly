@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="../favicon.ico">
+<title>Honeymoon Budget Planner | Wedding Budgetly</title>
+<meta name="description" content="Plan your honeymoon budget by destination, duration, and travel style with real cost data.">
+<meta property="og:title" content="Honeymoon Budget Planner | Wedding Budgetly">
+<meta property="og:description" content="Plan your honeymoon budget by destination and travel style.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://weddingbudgetly.com/tools/honeymoon-budget-planner.html">
+<meta property="og:image" content="https://weddingbudgetly.com/images/og-default.jpg">
+<link rel="canonical" href="https://weddingbudgetly.com/tools/honeymoon-budget-planner.html">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Honeymoon Budget Planner","applicationCategory":"FinanceApplication","operatingSystem":"Web Browser","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+</head>
+<body>
+<nav class="wbl-nav">
+  <div class="wbl-nav-container">
+    <a href="../index.html" class="wbl-logo">Wedding<span>Budgetly</span></a>
+    <button class="wbl-nav-toggle" onclick="document.querySelector('.wbl-nav-links').classList.toggle('active')" aria-label="Toggle menu">&#9776;</button>
+    <ul class="wbl-nav-links">
+      <li><a href="../index.html">Home</a></li><li><a href="./index.html">Tools</a></li><li><a href="../blog/index.html">Blog</a></li><li><a href="../about.html">About</a></li><li><a href="../contact.html">Contact</a></li><li><a href="../faq.html">FAQ</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="wbl-tool-hero" style="background:linear-gradient(135deg,#F39C12,#E74C3C);">
+  <h1>Honeymoon Budget Planner</h1>
+  <p>Enter your destination, duration, and travel style. See estimated costs for flights, hotels, food, and activities.</p>
+</div>
+
+<div class="wbl-ad-slot" id="article_top" data-ad-slot="article_top"></div>
+
+<div class="wbl-tool-container">
+<div class="wbl-tool-intro" style="max-width:900px;margin:0 auto;padding:32px 24px 16px;">
+  <h2 style="font-size:1.4rem;color:var(--wbl-secondary);margin-bottom:12px;">How the Honeymoon Budget Planner Works</h2>
+  <p>This <strong>honeymoon budget planner by destination</strong> builds a complete cost forecast from flights to meals to activities. Choose your destination—Mexico, Hawaii, Europe, Southeast Asia, Japan, or a Caribbean cruise—then set your travel style (budget hostel, moderate hotel, luxury resort, or all-inclusive). The tool applies real per-night cost databases and multiplies by your trip length, number of travelers, and departure-city flight multiplier. If you are wondering <strong>how much does a honeymoon cost</strong>, the average in 2026 runs $3,000–$8,000 depending on destination and length, with accommodations eating 35–50% of the total. <strong>Practical tip:</strong> all-inclusive resorts look expensive upfront but often beat à-la-carte pricing if you plan to drink cocktails by the pool. Use the "Compare Destinations" button to see every option side-by-side, save your favorite plan to localStorage, and export a day-by-day budget breakdown to share with your travel agent.</p>
+  <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;">
+    <span style="background:var(--wbl-bg);padding:4px 10px;border-radius:12px;font-size:0.75rem;color:var(--wbl-text-light);">💡 honeymoon budget planner by destination</span>
+    <span style="background:var(--wbl-bg);padding:4px 10px;border-radius:12px;font-size:0.75rem;color:var(--wbl-text-light);">💡 how much does honeymoon cost</span>
+    <span style="background:var(--wbl-bg);padding:4px 10px;border-radius:12px;font-size:0.75rem;color:var(--wbl-text-light);">💡 average honeymoon cost 2026</span>
+    <span style="background:var(--wbl-bg);padding:4px 10px;border-radius:12px;font-size:0.75rem;color:var(--wbl-text-light);">💡 destination honeymoon cost breakdown</span>
+  </div>
+</div>
+  <div class="wbl-tool-panel">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;">
+      <div class="wbl-form-group">
+        <label class="wbl-label">Destination</label>
+        <select id="destination" class="wbl-select" onchange="calculateHoneymoon()">
+          <option value="mexico">Mexico (Cancun / Puerto Vallarta)</option>
+          <option value="caribbean">Caribbean (Jamaica / Bahamas)</option>
+          <option value="hawaii">Hawaii</option>
+          <option value="europe">Europe (Paris / Rome / London)</option>
+          <option value="asia">Southeast Asia (Thailand / Bali)</option>
+          <option value="costarica">Costa Rica</option>
+          <option value="japan">Japan</option>
+          <option value="canada">Canada (Banff / Vancouver)</option>
+          <option value="domestic">US Domestic (NYC / SF / Miami)</option>
+          <option value="cruise">Caribbean Cruise</option>
+        </select>
+      </div>
+      <div class="wbl-form-group">
+        <label class="wbl-label">Duration (nights)</label>
+        <input type="number" id="nights" class="wbl-input" value="7" min="1" max="30" onchange="calculateHoneymoon()">
+      </div>
+      <div class="wbl-form-group">
+        <label class="wbl-label">Travel Style</label>
+        <select id="style" class="wbl-select" onchange="calculateHoneymoon()">
+          <option value="budget">Budget (Hostels / Budget Hotels)</option>
+          <option value="moderate" selected>Moderate (3-star Hotels / Airbnb)</option>
+          <option value="luxury">Luxury (Resorts / 5-star Hotels)</option>
+          <option value="allinclusive">All-Inclusive Resort</option>
+        </select>
+      </div>
+      <div class="wbl-form-group">
+        <label class="wbl-label">Number of Travelers</label>
+        <input type="number" id="travelers" class="wbl-input" value="2" min="1" max="4" onchange="calculateHoneymoon()">
+      </div>
+      <div class="wbl-form-group">
+        <label class="wbl-label">Departure City</label>
+        <select id="departure" class="wbl-select" onchange="calculateHoneymoon()">
+          <option value="major">Major Hub (NYC / LA / Chicago)</option>
+          <option value="medium">Medium City (Portland / Denver / Austin)</option>
+          <option value="small">Small City / Regional</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="wbl-tool-actions">
+      <button class="wbl-btn wbl-btn-primary" onclick="saveHoneymoon()">Save Plan</button>
+      <button class="wbl-btn wbl-btn-secondary" onclick="exportHoneymoon()">Export</button>
+      <button class="wbl-btn wbl-btn-outline" onclick="resetHoneymoon()">Reset</button>
+      <button class="wbl-btn wbl-btn-outline" onclick="compareHoneymoon()">Compare Destinations</button>
+    </div>
+  </div>
+
+  <div class="wbl-tool-result" id="resultPanel">
+    <h3>Honeymoon Cost Breakdown</h3>
+    <div class="wbl-chart-container">
+      <canvas id="honeymoonChart"></canvas>
+    </div>
+    <div id="honeymoonTable" style="margin-top:16px;"></div>
+    <div id="honeymoonTotal" style="margin-top:16px;padding:16px;border-radius:var(--wbl-radius-sm);font-size:1.2rem;font-weight:700;text-align:center;"></div>
+  </div>
+
+  <div class="wbl-tool-result" id="savedPlans" style="display:none;">
+    <h3>Saved Plans</h3>
+    <div id="savedList"></div>
+  </div>
+</div>
+
+<div class="wbl-ad-slot" id="article_bottom" data-ad-slot="article_bottom"></div>
+
+<div class="wbl-container" style="margin-top:48px;margin-bottom:48px;">
+  <div class="wbl-tail-grid">
+    <div class="wbl-tail-col">
+      <h3>Related Articles</h3>
+      <div class="wbl-tail-card"><a href="../blog/honeymoon-budget-planning-from-bali-to-banff-without-bankruptcy.html">Honeymoon Budget Planning</a><p>From Bali to Banff without bankruptcy.</p></div>
+      <div class="wbl-tail-card"><a href="../blog/how-to-build-a-wedding-registry-that-pays-for-your-wedding.html">Registry That Pays for Your Wedding</a><p>Use guest gifts to fund your honeymoon.</p></div>
+      <div class="wbl-tail-card"><a href="../blog/wedding-loans-are-a-trap-heres-the-math-and-my-friends-regret.html">Wedding Loans Are a Trap</a><p>Why borrowing for a honeymoon is dangerous.</p></div>
+    </div>
+    <div class="wbl-tail-col">
+      <h3>Recommended Tools</h3>
+      <div class="wbl-tail-card"><a href="./wedding-budget-calculator.html">Budget Calculator</a><p>Fit your honeymoon into your total budget.</p></div>
+      <div class="wbl-tail-card"><a href="./wedding-savings-tracker.html">Savings Tracker</a><p>Save specifically for your honeymoon.</p></div>
+      <div class="wbl-tail-card"><a href="./wedding-loan-calculator.html">Loan Calculator</a><p>See the true cost of borrowing for travel.</p></div>
+    </div>
+  </div>
+</div>
+
+<footer class="wbl-footer">
+  <div class="wbl-container">
+    <div class="wbl-footer-grid">
+      <div><h4>Wedding Budgetly</h4><p style="font-size:0.9rem;">Smart tools and honest advice.</p></div>
+      <div><h4>Tools</h4><ul><li><a href="./wedding-budget-calculator.html">Budget Calculator</a></li><li><a href="./honeymoon-budget-planner.html">Honeymoon Planner</a></li><li><a href="./wedding-loan-calculator.html">Loan Calculator</a></li></ul></div>
+      <div><h4>Navigate</h4><ul><li><a href="../index.html">Home</a></li><li><a href="./index.html">Tools</a></li><li><a href="../blog/index.html">Blog</a></li></ul></div>
+      <div><h4>Legal</h4><ul><li><a href="../privacy.html">Privacy</a></li><li><a href="../terms.html">Terms</a></li></ul></div>
+    </div>
+    <div class="wbl-footer-bottom"><p>&copy; 2024-2026 Wedding Budgetly. All rights reserved.</p></div>
+  </div>
+</footer>
+
+<script src="../ads-loader.js"></script>
+<script>
+const destCosts = {
+  mexico:{flight:400,hotel_budget:80,hotel_moderate:150,hotel_luxury:350,hotel_allinclusive:280,food:50,activities:40},
+  caribbean:{flight:500,hotel_budget:90,hotel_moderate:180,hotel_luxury:450,hotel_allinclusive:350,food:60,activities:50},
+  hawaii:{flight:600,hotel_budget:120,hotel_moderate:220,hotel_luxury:500,hotel_allinclusive:400,food:70,activities:60},
+  europe:{flight:800,hotel_budget:100,hotel_moderate:200,hotel_luxury:500,hotel_allinclusive:0,food:80,activities:70},
+  asia:{flight:900,hotel_budget:40,hotel_moderate:80,hotel_luxury:200,hotel_allinclusive:0,food:25,activities:30},
+  costarica:{flight:450,hotel_budget:70,hotel_moderate:140,hotel_luxury:350,hotel_allinclusive:250,food:45,activities:55},
+  japan:{flight:850,hotel_budget:80,hotel_moderate:160,hotel_luxury:400,hotel_allinclusive:0,food:60,activities:50},
+  canada:{flight:350,hotel_budget:90,hotel_moderate:170,hotel_luxury:400,hotel_allinclusive:0,food:55,activities:45},
+  domestic:{flight:300,hotel_budget:70,hotel_moderate:140,hotel_luxury:350,hotel_allinclusive:0,food:50,activities:40},
+  cruise:{flight:400,hotel_budget:0,hotel_moderate:0,hotel_luxury:0,hotel_allinclusive:200,food:0,activities:30}
+};
+
+const styleKeys = {budget:'hotel_budget',moderate:'hotel_moderate',luxury:'hotel_luxury',allinclusive:'hotel_allinclusive'};
+const departureMult = {major:1.0,medium:1.15,small:1.35};
+
+function calculateHoneymoon() {
+  const dest = document.getElementById('destination').value;
+  const nights = parseInt(document.getElementById('nights').value) || 7;
+  const style = document.getElementById('style').value;
+  const travelers = parseInt(document.getElementById('travelers').value) || 2;
+  const departure = document.getElementById('departure').value;
+
+  const d = destCosts[dest] || destCosts.mexico;
+  const sk = styleKeys[style] || 'hotel_moderate';
+  const dm = departureMult[departure] || 1.0;
+
+  const flights = Math.round(d.flight * travelers * dm * 2); // round trip
+  const hotel = Math.round(d[sk] * nights);
+  const food = Math.round(d.food * nights * travelers);
+  const activities = Math.round(d.activities * nights * travelers);
+  const misc = Math.round((flights + hotel + food + activities) * 0.1);
+  const total = flights + hotel + food + activities + misc;
+
+  const data = [
+    {label:'Flights', val:flights},
+    {label:'Hotel', val:hotel},
+    {label:'Food', val:food},
+    {label:'Activities', val:activities},
+    {label:'Misc', val:misc}
+  ];
+
+  drawHoneymoonChart(data, total);
+  buildHoneymoonTable(data, total, nights, dest);
+
+  const box = document.getElementById('honeymoonTotal');
+  box.style.background = 'linear-gradient(135deg,#fff8f9,#fff)';
+  box.style.border = '2px solid var(--wbl-primary)';
+  box.innerHTML = 'Estimated Total: <span style="color:var(--wbl-primary);">$'+total.toLocaleString()+'</span> for '+nights+' nights';
+}
+
+function drawHoneymoonChart(data, total) {
+  const canvas = document.getElementById('honeymoonChart');
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.parentElement.getBoundingClientRect();
+  canvas.width = rect.width * dpr;
+  canvas.height = 280 * dpr;
+  ctx.scale(dpr, dpr);
+
+  ctx.clearRect(0, 0, rect.width, 280);
+  const colors = ['#C0395B','#E74C3C','#F39C12','#27AE60','#2980B9'];
+  const centerX = rect.width / 2;
+  const centerY = 130;
+  const radius = 90;
+  let startAngle = -Math.PI / 2;
+
+  data.forEach((d, i) => {
+    const sliceAngle = (d.val / total) * Math.PI * 2;
+    ctx.beginPath();
+    ctx.moveTo(centerX, centerY);
+    ctx.arc(centerX, centerY, radius, startAngle, startAngle + sliceAngle);
+    ctx.closePath();
+    ctx.fillStyle = colors[i];
+    ctx.fill();
+    ctx.strokeStyle = '#fff';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    startAngle += sliceAngle;
+  });
+
+  let y = 20;
+  data.forEach((d, i) => {
+    ctx.fillStyle = colors[i];
+    ctx.fillRect(20, y, 12, 12);
+    ctx.fillStyle = '#333';
+    ctx.font = '12px sans-serif';
+    ctx.fillText(d.label + ' ('+Math.round(d.val/total*100)+'%)', 38, y+10);
+    y += 20;
+  });
+
+  ctx.fillStyle = '#333';
+  ctx.font = 'bold 14px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('Total', centerX, centerY-5);
+  ctx.font = '12px sans-serif';
+  ctx.fillText('$'+total.toLocaleString(), centerX, centerY+12);
+}
+
+function buildHoneymoonTable(data, total, nights, dest) {
+  let html = '<table class="wbl-table"><thead><tr><th>Category</th><th>Amount</th><th>% of Total</th></tr></thead><tbody>';
+  data.forEach(d => {
+    html += '<tr><td>'+d.label+'</td><td>$'+d.val.toLocaleString()+'</td><td>'+Math.round(d.val/total*100)+'%</td></tr>';
+  });
+  html += '<tr style="font-weight:700;background:var(--wbl-bg);"><td>Total</td><td>$'+total.toLocaleString()+'</td><td>100%</td></tr>';
+  html += '</tbody></table>';
+  document.getElementById('honeymoonTable').innerHTML = html;
+}
+
+function saveHoneymoon() {
+  const dest = document.getElementById('destination').value;
+  const nights = document.getElementById('nights').value;
+  const style = document.getElementById('style').value;
+  let saved = JSON.parse(localStorage.getItem('wbl_honeymoon') || '[]');
+  saved.push({dest, nights, style, date: new Date().toLocaleDateString()});
+  localStorage.setItem('wbl_honeymoon', JSON.stringify(saved));
+  alert('Plan saved!');
+  showSaved();
+}
+
+function showSaved() {
+  const saved = JSON.parse(localStorage.getItem('wbl_honeymoon') || '[]');
+  if (saved.length === 0) return;
+  document.getElementById('savedPlans').style.display = 'block';
+  let html = '<table class="wbl-table"><thead><tr><th>Date</th><th>Destination</th><th>Nights</th><th>Actions</th></tr></thead><tbody>';
+  saved.forEach((s, i) => {
+    html += '<tr><td>'+s.date+'</td><td>'+s.dest+'</td><td>'+s.nights+'</td><td><button onclick="loadHoneymoon('+i+')" class="wbl-btn wbl-btn-sm wbl-btn-outline">Load</button> <button onclick="deleteHoneymoon('+i+')" class="wbl-btn wbl-btn-sm wbl-btn-outline">Delete</button></td></tr>';
+  });
+  html += '</tbody></table>';
+  document.getElementById('savedList').innerHTML = html;
+}
+
+function loadHoneymoon(idx) {
+  const saved = JSON.parse(localStorage.getItem('wbl_honeymoon') || '[]');
+  const s = saved[idx];
+  document.getElementById('destination').value = s.dest;
+  document.getElementById('nights').value = s.nights;
+  document.getElementById('style').value = s.style;
+  calculateHoneymoon();
+}
+
+function deleteHoneymoon(idx) {
+  let saved = JSON.parse(localStorage.getItem('wbl_honeymoon') || '[]');
+  saved.splice(idx, 1);
+  localStorage.setItem('wbl_honeymoon', JSON.stringify(saved));
+  showSaved();
+}
+
+function exportHoneymoon() {
+  const dest = document.getElementById('destination').value;
+  const nights = document.getElementById('nights').value;
+  const style = document.getElementById('style').value;
+  let text = 'HONEYMOON BUDGET PLAN\nGenerated by Wedding Budgetly\n\n';
+  text += 'Destination: '+dest+'\nNights: '+nights+'\nStyle: '+style+'\n';
+  const blob = new Blob([text], {type:'text/plain'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'honeymoon-plan.txt';
+  a.click();
+}
+
+function resetHoneymoon() {
+  document.getElementById('destination').value = 'mexico';
+  document.getElementById('nights').value = 7;
+  document.getElementById('style').value = 'moderate';
+  document.getElementById('travelers').value = 2;
+  document.getElementById('departure').value = 'major';
+  calculateHoneymoon();
+}
+
+function compareHoneymoon() {
+  const nights = parseInt(document.getElementById('nights').value) || 7;
+  const style = document.getElementById('style').value;
+  const sk = styleKeys[style] || 'hotel_moderate';
+  const travelers = parseInt(document.getElementById('travelers').value) || 2;
+  const departure = document.getElementById('departure').value;
+  const dm = departureMult[departure] || 1.0;
+
+  let msg = 'DESTINATION COMPARISON ('+nights+' nights, '+travelers+' travelers)\n\n';
+  Object.keys(destCosts).forEach(dest => {
+    const d = destCosts[dest];
+    const flights = Math.round(d.flight * travelers * dm * 2);
+    const hotel = Math.round(d[sk] * nights);
+    const food = Math.round(d.food * nights * travelers);
+    const activities = Math.round(d.activities * nights * travelers);
+    const misc = Math.round((flights + hotel + food + activities) * 0.1);
+    const total = flights + hotel + food + activities + misc;
+    msg += dest+': $'+total.toLocaleString()+'\n';
+  });
+  alert(msg);
+}
+
+calculateHoneymoon();
+showSaved();
+</script>
+</body>
+</html>
