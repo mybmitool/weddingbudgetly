@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="../favicon.ico">
+<title>Per-Guest Cost Estimator | Wedding Budgetly</title>
+<meta name="description" content="Calculate true wedding cost per guest including catering, drinks, rentals, and venue fees by city.">
+<meta property="og:title" content="Per-Guest Cost Estimator | Wedding Budgetly">
+<meta property="og:description" content="Calculate true wedding cost per guest by city.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://weddingbudgetly.com/tools/per-guest-cost-estimator.html">
+<meta property="og:image" content="https://weddingbudgetly.com/images/og-default.jpg">
+<link rel="canonical" href="https://weddingbudgetly.com/tools/per-guest-cost-estimator.html">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Per-Guest Cost Estimator","applicationCategory":"FinanceApplication","operatingSystem":"Web Browser","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+</head>
+<body>
+<nav class="wbl-nav">
+  <div class="wbl-nav-container">
+    <a href="../index.html" class="wbl-logo">Wedding<span>Budgetly</span></a>
+    <button class="wbl-nav-toggle" onclick="document.querySelector('.wbl-nav-links').classList.toggle('active')" aria-label="Toggle menu">&#9776;</button>
+    <ul class="wbl-nav-links">
+      <li><a href="../index.html">Home</a></li><li><a href="./index.html">Tools</a></li><li><a href="../blog/index.html">Blog</a></li><li><a href="../about.html">About</a></li><li><a href="../contact.html">Contact</a></li><li><a href="../faq.html">FAQ</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="wbl-tool-hero" style="background:linear-gradient(135deg,#2980B9,#8E44AD);">
+  <h1>Per-Guest Cost Estimator</h1>
+  <p>Enter your guest count and city. See the true cost per person including catering, drinks, rentals, and venue.</p>
+</div>
+
+<div class="wbl-ad-slot" id="article_top" data-ad-slot="article_top"></div>
+
+<div class="wbl-tool-container">
+<div class="wbl-tool-intro" style="max-width:900px;margin:0 auto;padding:32px 24px 16px;">
+  <h2 style="font-size:1.4rem;color:var(--wbl-secondary);margin-bottom:12px;">How the Per-Guest Cost Estimator Works</h2>
+  <p>This <strong>wedding cost per guest calculator</strong> reveals the true cost per person once you factor in city pricing, meal style, bar package, and day-of-week discounts. Select your city to apply local market multipliers—New York and San Francisco run higher, while Oklahoma City and Phoenix run lower. Then choose plated, buffet, food-truck, or brunch service, plus open bar vs. beer-and-wine. The tool adds rentals, venue fees, service charges, gratuity, and tax so you see the full <strong>average cost per wedding guest by city</strong>, not just the catering quote. <strong>Practical tip:</strong> switching from Saturday to Friday can drop your per-guest cost by 15–25% because venues and caterers discount off-peak days. Save up to five estimates and compare them side-by-side to find the sweet spot between guest count and budget.</p>
+  <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;">
+    <span style="background:var(--wbl-bg);padding:4px 10px;border-radius:12px;font-size:0.75rem;color:var(--wbl-text-light);">💡 wedding cost per guest calculator</span>
+    <span style="background:var(--wbl-bg);padding:4px 10px;border-radius:12px;font-size:0.75rem;color:var(--wbl-text-light);">💡 how much does a wedding cost per person</span>
+    <span style="background:var(--wbl-bg);padding:4px 10px;border-radius:12px;font-size:0.75rem;color:var(--wbl-text-light);">💡 average cost per wedding guest by city</span>
+    <span style="background:var(--wbl-bg);padding:4px 10px;border-radius:12px;font-size:0.75rem;color:var(--wbl-text-light);">💡 catering cost per head wedding</span>
+  </div>
+</div>
+  <div class="wbl-tool-panel">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;">
+      <div class="wbl-form-group">
+        <label class="wbl-label">Number of Guests</label>
+        <input type="number" id="guestCount" class="wbl-input" value="100" min="10" max="500" onchange="calculateGuest()">
+      </div>
+      <div class="wbl-form-group">
+        <label class="wbl-label">City / Region</label>
+        <select id="citySelect" class="wbl-select" onchange="calculateGuest()">
+          <option value="national">National Average</option>
+          <option value="nyc">New York City</option>
+          <option value="la">Los Angeles</option>
+          <option value="chicago">Chicago</option>
+          <option value="houston">Houston</option>
+          <option value="phoenix">Phoenix</option>
+          <option value="philadelphia">Philadelphia</option>
+          <option value="sanantonio">San Antonio</option>
+          <option value="sandiego">San Diego</option>
+          <option value="dallas">Dallas</option>
+          <option value="sanjose">San Jose</option>
+          <option value="austin">Austin</option>
+          <option value="jacksonville">Jacksonville</option>
+          <option value="fortworth">Fort Worth</option>
+          <option value="columbus">Columbus</option>
+          <option value="charlotte">Charlotte</option>
+          <option value="indianapolis">Indianapolis</option>
+          <option value="sanfrancisco">San Francisco</option>
+          <option value="seattle">Seattle</option>
+          <option value="denver">Denver</option>
+          <option value="washington">Washington DC</option>
+          <option value="boston">Boston</option>
+          <option value="detroit">Detroit</option>
+          <option value="nashville">Nashville</option>
+          <option value="portland">Portland, OR</option>
+          <option value="oklahomacity">Oklahoma City</option>
+          <option value="lasvegas">Las Vegas</option>
+          <option value="louisville">Louisville</option>
+          <option value="baltimore">Baltimore</option>
+          <option value="milwaukee">Milwaukee</option>
+          <option value="albuquerque">Albuquerque</option>
+          <option value="tucson">Tucson</option>
+          <option value="fresno">Fresno</option>
+          <option value="sacramento">Sacramento</option>
+          <option value="mesa">Mesa</option>
+          <option value="kansascity">Kansas City</option>
+          <option value="atlanta">Atlanta</option>
+          <option value="longbeach">Long Beach</option>
+          <option value="coloradosprings">Colorado Springs</option>
+          <option value="raleigh">Raleigh</option>
+          <option value="omaha">Omaha</option>
+          <option value="miami">Miami</option>
+          <option value="oakland">Oakland</option>
+          <option value="minneapolis">Minneapolis</option>
+          <option value="tulsa">Tulsa</option>
+          <option value="cleveland">Cleveland</option>
+          <option value="wichita">Wichita</option>
+          <option value="arlington">Arlington</option>
+          <option value="neworleans">New Orleans</option>
+          <option value="bakersfield">Bakersfield</option>
+          <option value="tampa">Tampa</option>
+          <option value="honolulu">Honolulu</option>
+          <option value="anaheim">Anaheim</option>
+          <option value="aurora">Aurora</option>
+          <option value="santana">Santa Ana</option>
+          <option value="stpaul">St. Paul</option>
+          <option value="corpuschristi">Corpus Christi</option>
+          <option value="riverside">Riverside</option>
+          <option value="cincinnati">Cincinnati</option>
+          <option value="irvine">Irvine</option>
+          <option value="fortwayne">Fort Wayne</option>
+          <option value="st petersburg">St. Petersburg</option>
+          <option value="chandler">Chandler</option>
+          <option value="lincoln">Lincoln</option>
+          <option value="henderson">Henderson</option>
+          <option value="greensboro">Greensboro</option>
+          <option value="plano">Plano</option>
+          <option value="newark">Newark</option>
+          <option value="toledo">Toledo</option>
+          <option value="orlando">Orlando</option>
+          <option value="chulavista">Chula Vista</option>
+          <option value="jerseycity">Jersey City</option>
+          <option value="durham">Durham</option>
+          <option value="laredo">Laredo</option>
+          <option value="madison">Madison</option>
+          <option value="chandler">Chandler</option>
+          <option value="lubbock">Lubbock</option>
+          <option value="scottsdale">Scottsdale</option>
+          <option value="reno">Reno</option>
+          <option value="buffalo">Buffalo</option>
+          <option value="gilbert">Gilbert</option>
+          <option value="glendale">Glendale</option>
+          <option value="northlasvegas">North Las Vegas</option>
+          <option value="winstonsalem">Winston-Salem</option>
+          <option value="chesapeake">Chesapeake</option>
+          <option value="norfolk">Norfolk</option>
+          <option value="fremont">Fremont</option>
+          <option value="garland">Garland</option>
+          <option value="irving">Irving</option>
+          <option value="hialeah">Hialeah</option>
+          <option value="richmond">Richmond</option>
+          <option value="boise">Boise</option>
+          <option value="spokane">Spokane</option>
+          <option value="batonrouge">Baton Rouge</option>
+          <option value="desmoines">Des Moines</option>
+          <option value="tacoma">Tacoma</option>
+          <option value="sanbernardino">San Bernardino</option>
+          <option value="modesto">Modesto</option>
+          <option value="fontana">Fontana</option>
+          <option value="oxnard">Oxnard</option>
+          <option value="morenovalley">Moreno Valley</option>
+          <option value="fayetteville">Fayetteville</option>
+          <option value="huntingtonbeach">Huntington Beach</option>
+          <option value="yonkers">Yonkers</option>
+          <option value="montgomery">Montgomery</option>
+          <option value="amarillo">Amarillo</option>
+          <option value="akron">Akron</option>
+          <option value="littlerock">Little Rock</option>
+          <option value="tempe">Tempe</option>
+          <option value="columbusga">Columbus, GA</option>
+          <option value="overlandpark">Overland Park</option>
+          <option value="grandprairie">Grand Prairie</option>
+          <option value="tallahassee">Tallahassee</option>
+          <option value="cape coral">Cape Coral</option>
+          <option value="mobile">Mobile</option>
+          <option value="knoxville">Knoxville</option>
+          <option value="shreveport">Shreveport</option>
+          <option value="waco">Waco</option>
+          <option value="siouxfalls">Sioux Falls</option>
+          <option value="fortlauderdale">Fort Lauderdale</option>
+          <option value="newportnews">Newport News</option>
+          <option value="brownsville">Brownsville</option>
+          <option value="temecula">Temecula</option>
+          <option value="huntsville">Huntsville</option>
+          <option value="ontario">Ontario</option>
+          <option value="vancouver">Vancouver</option>
+          <option value="chattanooga">Chattanooga</option>
+          <option value="salem">Salem</option>
+          <option value="eugene">Eugene</option>
+          <option value="olathe">Olathe</option>
+          <option value="pembrokepines">Pembroke Pines</option>
+          <option value="springfield">Springfield</option>
+          <option value="fortcollins">Fort Collins</option>
+          <option value="lancaster">Lancaster</option>
+          <option value="cary">Cary</option>
+          <option value="hayward">Hayward</option>
+          <option value="palmdale">Palmdale</option>
+          <option value="salinas">Salinas</option>
+          <option value="alexandria">Alexandria</option>
+          <option value="lakewood">Lakewood</option>
+          <option value="springfieldmo">Springfield, MO</option>
+          <option value="pasadena">Pasadena</option>
+          <option value="sunnyvale">Sunnyvale</option>
+          <option value="pomona">Pomona</option>
+          <option value="hollywood">Hollywood</option>
+          <option value="escondido">Escondido</option>
+          <option value="clarksville">Clarksville</option>
+          <option value="joliet">Joliet</option>
+          <option value="rockford">Rockford</option>
+          <option value="torrance">Torrance</option>
+          <option value="naperville">Naperville</option>
+          <option value="paterson">Paterson</option>
+          <option value="savannah">Savannah</option>
+          <option value="bridgeport">Bridgeport</option>
+          <option value="mesquite">Mesquite</option>
+          <option value="killeen">Killeen</option>
+          <option value="syracuse">Syracuse</option>
+          <option value="mckinney">McKinney</option>
+          <option value="pasadena">Pasadena, TX</option>
+          <option value="bellevue">Bellevue</option>
+          <option value="fullerton">Fullerton</option>
+          <option value="orange">Orange</option>
+          <option value="denton">Denton</option>
+          <option value="wilmington">Wilmington</option>
+          <option value="warren">Warren</option>
+          <option value="midland">Midland</option>
+          <option value="surprise">Surprise</option>
+          <option value="thornton">Thornton</option>
+          <option value="waco">Waco</option>
+          <option value="westvalley">West Valley City</option>
+          <option value="columbia">Columbia</option>
+          <option value="murfreesboro">Murfreesboro</option>
+          <option value="olathe">Olathe</option>
+          <option value="sterlingheights">Sterling Heights</option>
+          <option value="visalia">Visalia</option>
+          <option value="newhaven">New Haven</option>
+          <option value="miramar">Miramar</option>
+          <option value="miami gardens">Miami Gardens</option>
+          <option value="carlsbad">Carlsbad</option>
+          <option value="westminster">Westminster</option>
+          <option value="westjordan">West Jordan</option>
+          <option value="clearwater">Clearwater</option>
+          <option value="manchester">Manchester</option>
+          <option value="elgin">Elgin</option>
+          <option value="provo">Provo</option>
+          <option value="lansing">Lansing</option>
+          <option value="lowell">Lowell</option>
+          <option value="pueblo">Pueblo</option>
+          <option value="greeley">Greeley</option>
+          <option value="berkeley">Berkeley</option>
+          <option value="billings">Billings</option>
+          <option value="inglewood">Inglewood</option>
+          <option value="fairfield">Fairfield</option>
+          <option value="sanbuenaventura">San Buenaventura</option>
+          <option value="westcovina">West Covina</option>
+          <option value="daly">Daly City</option>
+          <option value="antioch">Antioch</option>
+          <option value="richardson">Richardson</option>
+          <option value="rie">Rie</option>
+          <option value="palm bay">Palm Bay</option>
+          <option value="centennial">Centennial</option>
+          <option value="boulder">Boulder</option>
+          <option value="highpoint">High Point</option>
+          <option value="downey">Downey</option>
+          <option value="costamesa">Costa Mesa</option>
+          <option value="miamibeach">Miami Beach</option>
+          <option value="elmonte">El Monte</option>
+          <option value="inglewood">Inglewood</option>
+          <option value="brokenarrow">Broken Arrow</option>
+          <option value="manchester">Manchester, NH</option>
+          <option value="berkeley">Berkeley</option>
+          <option value="waterbury">Waterbury</option>
+          <option value="westminster">Westminster</option>
+          <option value="gresham">Gresham</option>
+          <option value="clearwater">Clearwater</option>
+          <option value="lowell">Lowell</option>
+          <option value="pueblo">Pueblo</option>
+          <option value="sanmateo">San Mateo</option>
+          <option value="lewisville">Lewisville</option>
+          <option value="southbend">South Bend</option>
+          <option value="lakeland">Lakeland</option>
+          <option value="erie">Erie</option>
+          <option value="tyler">Tyler</option>
+          <option value="pearland">Pearland</option>
+          <option value="college station">College Station</option>
+          <option value="kenosha">Kenosha</option>
+          <option value="clovis">Clovis</option>
+          <option value="sioux city">Sioux City</option>
+          <option value="edison">Edison</option>
+          <option value="daly city">Daly City</option>
+          <option value="sanangelo">San Angelo</option>
+          <option value="norman">Norman</option>
+          <option value="richmond">Richmond, VA</option>
+          <option value="albany">Albany</option>
+          <option value="burbank">Burbank</option>
+          <option value="sanjacinto">San Jacinto</option>
+          <option value="league city">League City</option>
+          <option value="bellingham">Bellingham</option>
+          <option value="bend">Bend</option>
+          <option value="beaverton">Beaverton</option>
+          <option value="medford">Medford</option>
+          <option value="springfield">Springfield, OR</option>
+          <option value="corvallis">Corvallis</option>
+          <option value="albany">Albany, OR</option>
+          <option value="tigard">Tigard</option>
+          <option value="lakeoswego">Lake Oswego</option>
+          <option value="keizer">Keizer</option>
+          <option value="grants pass">Grants Pass</option>
+          <option value="oregon city">Oregon City</option>
+          <option value="mcminnville">McMinnville</option>
+          <option value="redmond">Redmond, OR</option>
+          <option value="tualatin">Tualatin</option>
+          <option value="west linn">West Linn</option>
+          <option value="woodburn">Woodburn</option>
+          <option value="forest grove">Forest Grove</option>
+          <option value="newberg">Newberg</option>
+          <option value="roseburg">Roseburg</option>
+          <option value="wilsonville">Wilsonville</option>
+          <option value="happy valley">Happy Valley</option>
+          <option value="hayward">Hayward, OR</option>
+          <option value="astoria">Astoria</option>
+          <option value="prineville">Prineville</option>
+          <option value="hermiston">Hermiston</option>
+          <option value="coos bay">Coos Bay</option>
+          <option value="the dalles">The Dalles</option>
+          <option value="pendleton">Pendleton</option>
+          <option value="troutdale">Troutdale</option>
+          <option value="ontario">Ontario, OR</option>
+          <option value="sandy">Sandy</option>
+          <option value="la grande">La Grande</option>
+          <option value="stayton">Stayton</option>
+          <option value="hood river">Hood River</option>
+          <option value="milwaukie">Milwaukie</option>
+          <option value="silverton">Silverton</option>
+          <option value="baker city">Baker City</option>
+          <option value="sweet home">Sweet Home</option>
+          <option value="north bend">North Bend</option>
+          <option value="madras">Madras</option>
+          <option value="scappoose">Scappoose</option>
+          <option value="st. helens">St. Helens</option>
+          <option value="creswell">Creswell</option>
+          <option value="mulino">Mulino</option>
+          <option value="philomath">Philomath</option>
+          <option value="junction city">Junction City</option>
+          <option value="florence">Florence</option>
+          <option value="warrenton">Warrenton</option>
+          <option value="newport">Newport</option>
+          <option value="tillamook">Tillamook</option>
+          <option value="lincoln city">Lincoln City</option>
+          <option value="seaside">Seaside</option>
+          <option value="cannon beach">Cannon Beach</option>
+          <option value="gearhart">Gearhart</option>
+          <option value="manzanita">Manzanita</option>
+          <option value="rockaway beach">Rockaway Beach</option>
+          <option value="depoe bay">Depoe Bay</option>
+          <option value="waldport">Waldport</option>
+          <option value="yachats">Yachats</option>
+          <option value="bandon">Bandon</option>
+          <option value="port orford">Port Orford</option>
+          <option value="brookings">Brookings</option>
+          <option value="gold beach">Gold Beach</option>
+          <option value="langlois">Langlois</option>
+          <option value="myrtle point">Myrtle Point</option>
+          <option value="coquille">Coquille</option>
+          <option value="powers">Powers</option>
+          <option value="dunes city">Dunes City</option>
+          <option value="reedsport">Reedsport</option>
+          <option value="lakeside">Lakeside</option>
+          <option value="westlake">Westlake</option>
+          <option value="north plains">North Plains</option>
+          <option value="banks">Banks</option>
+          <option value="gaston">Gaston</option>
+          <option value="carlton">Carlton</option>
+          <option value="yamhill">Yamhill</option>
+          <option value="dayton">Dayton</option>
+          <option value="dundee">Dundee</option>
+          <option value="newberg">Newberg</option>
+          <option value="sherwood">Sherwood</option>
+          <option value="king city">King City</option>
+          <option value="tualatin">Tualatin</option>
+          <option value="wilsonville">Wilsonville</option>
+          <option value="canby">Canby</option>
+          <option value="molalla">Molalla</option>
+          <option value="estacada">Estacada</option>
+          <option value="colton">Colton</option>
+          <option value="beavercreek">Beavercreek</option>
+          <option value="oregon city">Oregon City</option>
+          <option value="west linn">West Linn</option>
+          <option value="lake oswego">Lake Oswego</option>
+          <option value="milwaukie">Milwaukie</option>
+          <option value="happy valley">Happy Valley</option>
+          <option value="damascus">Damascus</option>
+          <option value="boring">Boring</option>
+          <option value="sandy">Sandy</option>
+          <option value="estacada">Estacada</option>
+          <option value="madras">Madras</option>
+          <option value="culver">Culver</option>
+          <option value="metolius">Metolius</option>
+          <option value="warm springs">Warm Springs</option>
+          <option value=" Sisters">Sisters</option>
+          <option value=" camp sherman">Camp Sherman</option>
+          <option value=" black butte ranch">Black Butte Ranch</option>
+          <option value=" sunriver">Sunriver</option>
+          <option value=" la pine">La Pine</option>
+          <option value=" bend">Bend</option>
+          <option value=" redmond">Redmond</option>
+          <option value=" prineville">Prineville</option>
+          <option value=" mitchell">Mitchell</option>
+          <option value=" dayville">Dayville</option>
+          <option value=" mount vernon">Mount Vernon</option>
+          <option value=" john day">John Day</option>
+          <option value=" canyon city">Canyon City</option>
+          <option value=" prairie city">Prairie City</option>
+          <option value=" hines">Hines</option>
+          <option value=" burns">Burns</option>
+          <option value=" harney">Harney</option>
+          <option value=" fields">Fields</option>
+          <option value=" frenchglen">Frenchglen</option>
+          <option value=" diamond">Diamond</option>
+          <option value=" denio">Denio</option>
+          <option value=" mcdermitt">McDermitt</option>
+          <option value=" adrian">Adrian</option>
+          <option value=" nyssa">Nyssa</option>
+          <option value=" ontario">Ontario</option>
+          <option value=" vale">Vale</option>
+          <option value=" jordan valley">Jordan Valley</option>
+          <option value=" rome">Rome</option>
+          <option value=" burns junction">Burns Junction</option>
+          <option value=" crane">Crane</option>
+          <option value=" lawen">Lawen</option>
+          <option value=" riley">Riley</option>
+          <option value=" wagontire">Wagontire</option>
+          <option value=" summer lake">Summer Lake</option>
+          <option value=" silver lake">Silver Lake</option>
+          <option value=" fort rock">Fort Rock</option>
+          <option value=" christmas valley">Christmas Valley</option>
+          <option value=" paisley">Paisley</option>
+          <option value=" lakeview">Lakeview</option>
+          <option value=" new pine creek">New Pine Creek</option>
+          <option value=" klamath falls">Klamath Falls</option>
+          <option value=" merrill">Merrill</option>
+          <option value=" malin">Malin</option>
+          <option value=" tulelake">Tulelake</option>
+          <option value=" dorris">Dorris</option>
+          <option value=" dunsmuir">Dunsmuir</option>
+          <option value=" mount shasta">Mount Shasta</option>
+          <option value=" weed">Weed</option>
+          <option value=" yreka">Yreka</option>
+          <option value=" montague">Montague</option>
+          <option value=" hornbrook">Hornbrook</option>
+          <option value=" happy camp">Happy Camp</option>
+          <option value=" orleans">Orleans</option>
+          <option value=" somes bar">Somes Bar</option>
+          <option value=" forks of salmon">Forks of Salmon</option>
+          <option value=" klamath river">Klamath River</option>
+          <option value=" seiad valley">Seiad Valley</option>
+          <option value=" happy camp">Happy Camp</option>
+          <option value=" greenview">Greenview</option>
+          <option value=" fort jones">Fort Jones</option>
+          <option value=" etna">Etna</option>
+          <option value=" gazelle">Gazelle</option>
+          <option value=" scott valley">Scott Valley</option>
+          <option value=" callahan">Callahan</option>
+          <option value=" cecilville">Cecilville</option>
+          <option value=" sawyers bar">Sawyers Bar</option>
+          <option value=" somes bar">Somes Bar</option>
+          <option value=" orleans">Orleans</option>
+          <option value=" hap "
+        </select>
+      </div>
+      <div class="wbl-form-group">
+        <label class="wbl-label">Meal Style</label>
+        <select id="mealStyle" class="wbl-select" onchange="calculateGuest()">
+          <option value="plated">Plated Dinner</option>
+          <option value="buffet">Buffet</option>
+          <option value="foodtruck">Food Truck</option>
+          <option value="family">Family Style</option>
+          <option value="brunch">Brunch / Breakfast</option>
+        </select>
+      </div>
+      <div class="wbl-form-group">
+        <label class="wbl-label">Bar Type</label>
+        <select id="barType" class="wbl-select" onchange="calculateGuest()">
+          <option value="open">Open Bar</option>
+          <option value="beerwine">Beer & Wine Only</option>
+          <option value="cash">Cash Bar</option>
+          <option value="none">No Alcohol</option>
+        </select>
+      </div>
+      <div class="wbl-form-group">
+        <label class="wbl-label">Day of Week</label>
+        <select id="dayOfWeek" class="wbl-select" onchange="calculateGuest()">
+          <option value="saturday">Saturday</option>
+          <option value="friday">Friday</option>
+          <option value="sunday">Sunday</option>
+          <option value="weekday">Weekday</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="wbl-tool-actions">
+      <button class="wbl-btn wbl-btn-primary" onclick="saveGuest()">Save Estimate</button>
+      <button class="wbl-btn wbl-btn-secondary" onclick="exportGuest()">Export</button>
+      <button class="wbl-btn wbl-btn-outline" onclick="resetGuest()">Reset</button>
+      <button class="wbl-btn wbl-btn-outline" onclick="compareGuest()">Compare Cities</button>
+    </div>
+  </div>
+
+  <div class="wbl-tool-result" id="resultPanel">
+    <h3>Per-Guest Cost Breakdown</h3>
+    <div class="wbl-chart-container">
+      <canvas id="guestChart"></canvas>
+    </div>
+    <div id="guestTable" style="margin-top:16px;"></div>
+    <div id="guestSummary" style="margin-top:16px;padding:16px;background:var(--wbl-bg);border-radius:var(--wbl-radius-sm);"></div>
+  </div>
+
+  <div class="wbl-tool-result" id="savedEstimates" style="display:none;">
+    <h3>Saved Estimates</h3>
+    <div id="savedList"></div>
+  </div>
+</div>
+
+<div class="wbl-ad-slot" id="article_bottom" data-ad-slot="article_bottom"></div>
+
+<div class="wbl-container" style="margin-top:48px;margin-bottom:48px;">
+  <div class="wbl-tail-grid">
+    <div class="wbl-tail-col">
+      <h3>Related Articles</h3>
+      <div class="wbl-tail-card"><a href="../blog/the-complete-wedding-budget-breakdown-where-every-dollar-goes.html">The Complete Wedding Budget Breakdown</a><p>Exactly where your money goes.</p></div>
+      <div class="wbl-tail-card"><a href="../blog/wedding-catering-on-a-budget-buffet-vs-plated-vs-food-truck.html">Catering: Buffet vs Plated vs Food Truck</a><p>The real cost difference between meal styles.</p></div>
+      <div class="wbl-tail-card"><a href="../blog/fridaysunday-wedding-hack-vendor-pricing-decoded.html">Friday/Sunday Wedding Hack</a><p>How day of week affects per-guest costs.</p></div>
+    </div>
+    <div class="wbl-tail-col">
+      <h3>Recommended Tools</h3>
+      <div class="wbl-tail-card"><a href="./wedding-budget-calculator.html">Wedding Budget Calculator</a><p>Full budget breakdown by category.</p></div>
+      <div class="wbl-tail-card"><a href="./venue-vs-backyard-analyzer.html">Venue vs Backyard Analyzer</a><p>Compare venue types and their guest costs.</p></div>
+      <div class="wbl-tail-card"><a href="./wedding-savings-tracker.html">Savings Tracker</a><p>Track progress toward your guest budget.</p></div>
+    </div>
+  </div>
+</div>
+
+<footer class="wbl-footer">
+  <div class="wbl-container">
+    <div class="wbl-footer-grid">
+      <div><h4>Wedding Budgetly</h4><p style="font-size:0.9rem;">Smart tools and honest advice.</p></div>
+      <div><h4>Tools</h4><ul><li><a href="./wedding-budget-calculator.html">Budget Calculator</a></li><li><a href="./per-guest-cost-estimator.html">Per-Guest Estimator</a></li><li><a href="./venue-vs-backyard-analyzer.html">Venue Analyzer</a></li></ul></div>
+      <div><h4>Navigate</h4><ul><li><a href="../index.html">Home</a></li><li><a href="./index.html">Tools</a></li><li><a href="../blog/index.html">Blog</a></li></ul></div>
+      <div><h4>Legal</h4><ul><li><a href="../privacy.html">Privacy</a></li><li><a href="../terms.html">Terms</a></li></ul></div>
+    </div>
+    <div class="wbl-footer-bottom"><p>&copy; 2024-2026 Wedding Budgetly. All rights reserved.</p></div>
+  </div>
+</footer>
+
+<script src="../ads-loader.js"></script>
+<script>
+const cityMultipliers = {
+  national:1.0, nyc:1.65, la:1.45, chicago:1.25, houston:1.0, phoenix:0.95, philadelphia:1.2, sanantonio:0.9, sandiego:1.3, dallas:1.05,
+  sanjose:1.55, austin:1.15, jacksonville:0.95, fortworth:1.0, columbus:1.0, charlotte:1.05, indianapolis:0.95, sanfrancisco:1.7, seattle:1.35, denver:1.15,
+  washington:1.4, boston:1.45, detroit:1.0, nashville:1.05, portland:1.15, oklahomacity:0.85, lasvegas:1.0, louisville:0.9, baltimore:1.15, milwaukee:0.95,
+  albuquerque:0.85, tucson:0.85, fresno:0.9, sacramento:1.1, mesa:0.95, kansascity:0.95, atlanta:1.1, longbeach:1.35, coloradosprings:1.05, raleigh:1.05,
+  omaha:0.9, miami:1.25, oakland:1.45, minneapolis:1.1, tulsa:0.85, cleveland:0.95, wichita:0.85, arlington:1.0, neworleans:1.05, bakersfield:0.9,
+  tampa:1.0, honolulu:1.5, anaheim:1.35, aurora:1.1, santana:1.35, stpaul:1.1, corpushristi:0.9, riverside:1.15, cincinnati:0.95, irvine:1.5,
+  fortwayne:0.85, stpetersburg:1.0, chandler:0.95, lincoln:0.85, henderson:1.0, greensboro:0.9, plano:1.1, newark:1.35, toledo:0.85, orlando:1.0,
+  chulavista:1.3, jerseycity:1.55, durham:1.05, laredo:0.85, madison:1.0, lubbock:0.85, scottsdale:1.15, reno:1.0, buffalo:0.85, gilbert:0.95,
+  glendale:0.95, northlasvegas:1.0, winstonsalem:0.9, chesapeake:1.0, norfolk:1.0, fremont:1.45, garland:1.05, irving:1.05, hialeah:1.15, richmond:1.05,
+  boise:0.95, spokane:0.9, batonrouge:0.9, desmoines:0.9, tacoma:1.05, sanbernardino:1.1, modesto:1.0, fontana:1.1, oxnard:1.25, morenovalley:1.1,
+  fayetteville:0.85, huntingtonbeach:1.4, yonkers:1.45, montgomery:0.85, amarillo:0.85, akron:0.85, littlerock:0.85, tempe:0.95, columbusga:0.8, overlandpark:0.95,
+  grandprairie:1.05, tallahassee:0.9, capecoral:1.0, mobile:0.85, knoxville:0.9, shreveport:0.85, waco:0.85, siouxfalls:0.85, fortlauderdale:1.2, newportnews:1.0,
+  brownsville:0.85, temecula:1.15, huntsville:0.9, ontario:1.1, vancouver:1.05, chattanooga:0.85, salem:1.0, eugene:1.0, olathe:0.95, pembrokepines:1.15,
+  springfield:0.85, fortcollins:1.05, lancaster:1.1, cary:1.05, hayward:1.4, palmdale:1.15, salinas:1.15, alexandria:1.15, lakewood:1.1, springfieldmo:0.85,
+  pasadena:1.35, sunnyvale:1.55, pomona:1.15, hollywood:1.15, escondido:1.2, clarksville:0.85, joliet:0.95, rockford:0.85, torrance:1.35, naperville:1.05,
+  paterson:1.35, savannah:0.95, bridgeport:1.25, mesquite:1.05, killeen:0.85, syracuse:0.85, mckinney:1.1, pasadenatx:1.05, bellevue:1.25, fullerton:1.25,
+  orange:1.25, denton:1.05, wilmington:1.0, warren:0.9, midland:1.0, surprise:0.95, thornton:1.1, westvalley:0.95, columbia:0.9, murfreesboro:0.9,
+  sterlingheights:0.9, visalia:0.95, newhaven:1.2, miramar:1.15, miamigardens:1.2, carlsbad:1.25, westminster:1.1, westjordan:0.95, clearwater:1.0, manchester:1.0,
+  elgin:0.95, provo:0.95, lansing:0.85, lowell:1.15, pueblo:0.9, greeley:1.05, berkeley:1.45, billings:0.85, inglewood:1.35, fairfield:1.25,
+  sanbuenaventura:1.2, westcovina:1.15, dalycity:1.45, antioch:1.2, richardson:1.05, palm:1.05, centennial:1.1, boulder:1.15, highpoint:0.9, downey:1.15,
+  costamesa:1.3, miamibeach:1.3, elmonte:1.15, brokenarrow:0.85, manchester:1.0, waterbury:1.15, gresham:1.05, clearwater:1.0, sanmateo:1.45, lewisville:1.05,
+  southbend:0.85, lakeland:0.95, erie:0.85, tyler:0.85, pearland:1.05, collegestation:0.9, kenosha:0.9, clovis:0.95, siouxcity:0.85, edison:1.3,
+  dalycity:1.45, sanangelo:0.85, norman:0.85, richmondva:1.05, albany:1.0, burbank:1.35, sanjacinto:1.1, leaguecity:1.05, bellingham:1.05, bend:1.0,
+  beaverton:1.05, medford:0.95, springfieldor:0.9, corvallis:0.95, albanyor:0.9, tigard:1.05, lakeoswego:1.05, keizer:0.95, grantspass:0.9, oregoncity:1.0,
+  mcminnville:0.95, redmondor:0.95, tualatin:1.05, westlinn:1.05, woodburn:0.95, forestgrove:0.95, newberg:0.95, roseburg:0.9, wilsonville:1.05, happyvalley:1.05,
+  haywardor:0.9, astoria:0.95, prineville:0.9, hermiston:0.9, coosbay:0.9, thedalles:0.9, pendleton:0.9, troutdale:1.0, ontarioor:0.85, sandy:0.95,
+  lagrande:0.85, stayton:0.9, hoodriver:0.95, milwaukie:1.0, silverton:0.9, bakercity:0.85, sweethome:0.9, northbend:0.9, madras:0.9, scappoose:0.95,
+  sthelens:0.95, creswell:0.9, mulino:0.9, philomath:0.9, junctioncity:0.9, florence:0.9, warrenton:0.9, newport:0.95, tillamook:0.9, lincolncity:0.95,
+  seaside:0.95, cannonbeach:0.95, gearhart:0.95, manzanita:0.95, rockawaybeach:0.95, depoebay:0.95, waldport:0.9, yachats:0.9, bandon:0.9, portorford:0.9,
+  brookings:0.9, goldbeach:0.9, langlois:0.85, myrtlepoint:0.85, coquille:0.85, powers:0.85, dunescity:0.9, reedsport:0.9, lakeside:0.85, westlake:0.9,
+  northplains:0.95, banks:0.9, gaston:0.9, carlton:0.9, yamhill:0.9, dayton:0.9, dundee:0.95, sherwood:1.0, kingcity:1.0, canby:0.95,
+  molalla:0.9, estacada:0.9, colton:0.9, beavercreek:0.9, damascus:0.95, boring:0.9, culver:0.9, metolius:0.9, warmsprings:0.85, sisters:0.9,
+  campsherman:0.9, blackbutteranch:0.9, sunriver:0.95, lapine:0.9, mitchell:0.85, dayville:0.85, mountvernon:0.85, johnday:0.85, canyoncity:0.85, prairiecity:0.85,
+  hines:0.85, burns:0.85, harney:0.85, fields:0.85, frenchglen:0.85, diamond:0.85, denio:0.85, mcdermitt:0.85, adrian:0.85, nyssa:0.85,
+  vale:0.85, jordanvalley:0.85, rome:0.85, burnsjunction:0.85, crane:0.85, lawen:0.85, riley:0.85, wagontire:0.85, summerlake:0.85, silverlake:0.85,
+  fortrock:0.85, christmasvalley:0.85, paisley:0.85, lakeview:0.85, newpinecreek:0.85, klamathfalls:0.9, merrill:0.85, malin:0.85, tulelake:0.85, dorris:0.85,
+  dunsmuir:0.85, mountshasta:0.85, weed:0.85, yreka:0.85, montague:0.85, hornbrook:0.85, happycamp:0.85, orleans:0.85, somesbar:0.85, forksofsalmon:0.85,
+  klamathriver:0.85, seiadvalley:0.85, greenview:0.85, fortjones:0.85, etna:0.85, gazelle:0.85, scottvalley:0.85, callahan:0.85, cecilville:0.85, sawyersbar:0.85
+};
+
+const mealMultipliers = {plated:1.0, buffet:0.75, foodtruck:0.45, family:0.85, brunch:0.55};
+const barMultipliers = {open:1.0, beerwine:0.55, cash:0.15, none:0};
+const dayMultipliers = {saturday:1.0, friday:0.85, sunday:0.8, weekday:0.7};
+
+function calculateGuest() {
+  const guests = parseInt(document.getElementById('guestCount').value) || 100;
+  const city = document.getElementById('citySelect').value;
+  const meal = document.getElementById('mealStyle').value;
+  const bar = document.getElementById('barType').value;
+  const day = document.getElementById('dayOfWeek').value;
+
+  const base = 150;
+  const cm = cityMultipliers[city] || 1.0;
+  const mm = mealMultipliers[meal] || 1.0;
+  const bm = barMultipliers[bar] || 1.0;
+  const dm = dayMultipliers[day] || 1.0;
+
+  const foodCost = base * cm * mm * dm;
+  const barCost = base * cm * bm * dm;
+  const rentalCost = 25 * cm * dm;
+  const venueCost = 35 * cm * dm;
+  const serviceCost = (foodCost + barCost) * 0.2;
+  const gratuity = (foodCost + barCost) * 0.18;
+  const tax = (foodCost + barCost + serviceCost) * 0.1;
+
+  const perGuest = foodCost + barCost + rentalCost + venueCost + serviceCost + gratuity + tax;
+  const total = Math.round(perGuest * guests);
+
+  const data = [
+    {label:'Food', val:foodCost},
+    {label:'Bar', val:barCost},
+    {label:'Rentals', val:rentalCost},
+    {label:'Venue', val:venueCost},
+    {label:'Service', val:serviceCost},
+    {label:'Gratuity', val:gratuity},
+    {label:'Tax', val:tax}
+  ];
+
+  drawGuestChart(data, perGuest);
+  buildGuestTable(data, guests, perGuest, total);
+
+  document.getElementById('guestSummary').innerHTML = 
+    '<strong>Per Guest: $'+perGuest.toFixed(0)+'</strong> | <strong>Total for '+guests+' guests: $'+total.toLocaleString()+'</strong>';
+}
+
+function drawGuestChart(data, total) {
+  const canvas = document.getElementById('guestChart');
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.parentElement.getBoundingClientRect();
+  canvas.width = rect.width * dpr;
+  canvas.height = 280 * dpr;
+  ctx.scale(dpr, dpr);
+
+  const colors = ['#C0395B','#E74C3C','#F39C12','#27AE60','#2980B9','#8E44AD','#95A5A6'];
+  const maxVal = Math.max(...data.map(d=>d.val));
+  const barWidth = (rect.width - 80) / data.length;
+
+  ctx.clearRect(0, 0, rect.width, 280);
+
+  data.forEach((d, i) => {
+    const h = (d.val / maxVal) * 180;
+    const x = 40 + i * barWidth + barWidth * 0.15;
+    const y = 200 - h;
+    ctx.fillStyle = colors[i];
+    ctx.fillRect(x, y, barWidth * 0.7, h);
+    ctx.fillStyle = '#333';
+    ctx.font = '11px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('$'+d.val.toFixed(0), x + barWidth*0.35, y - 5);
+    ctx.fillText(d.label, x + barWidth*0.35, 220);
+  });
+}
+
+function buildGuestTable(data, guests, perGuest, total) {
+  let html = '<table class="wbl-table"><thead><tr><th>Category</th><th>Per Guest</th><th>Total ('+guests+' guests)</th></tr></thead><tbody>';
+  data.forEach(d => {
+    html += '<tr><td>'+d.label+'</td><td>$'+d.val.toFixed(0)+'</td><td>$'+(d.val*guests).toLocaleString()+'</td></tr>';
+  });
+  html += '<tr style="font-weight:700;background:var(--wbl-bg);"><td>Total</td><td>$'+perGuest.toFixed(0)+'</td><td>$'+total.toLocaleString()+'</td></tr>';
+  html += '</tbody></table>';
+  document.getElementById('guestTable').innerHTML = html;
+}
+
+function saveGuest() {
+  const guests = document.getElementById('guestCount').value;
+  const city = document.getElementById('citySelect').value;
+  const meal = document.getElementById('mealStyle').value;
+  const bar = document.getElementById('barType').value;
+  const day = document.getElementById('dayOfWeek').value;
+  let saved = JSON.parse(localStorage.getItem('wbl_guests') || '[]');
+  saved.push({guests, city, meal, bar, day, date: new Date().toLocaleDateString()});
+  localStorage.setItem('wbl_guests', JSON.stringify(saved));
+  alert('Estimate saved!');
+  showSaved();
+}
+
+function showSaved() {
+  const saved = JSON.parse(localStorage.getItem('wbl_guests') || '[]');
+  if (saved.length === 0) return;
+  document.getElementById('savedEstimates').style.display = 'block';
+  let html = '<table class="wbl-table"><thead><tr><th>Date</th><th>Guests</th><th>City</th><th>Actions</th></tr></thead><tbody>';
+  saved.forEach((s, i) => {
+    html += '<tr><td>'+s.date+'</td><td>'+s.guests+'</td><td>'+s.city+'</td><td><button onclick="loadGuest('+i+')" class="wbl-btn wbl-btn-sm wbl-btn-outline">Load</button> <button onclick="deleteGuest('+i+')" class="wbl-btn wbl-btn-sm wbl-btn-outline">Delete</button></td></tr>';
+  });
+  html += '</tbody></table>';
+  document.getElementById('savedList').innerHTML = html;
+}
+
+function loadGuest(idx) {
+  const saved = JSON.parse(localStorage.getItem('wbl_guests') || '[]');
+  const s = saved[idx];
+  document.getElementById('guestCount').value = s.guests;
+  document.getElementById('citySelect').value = s.city;
+  document.getElementById('mealStyle').value = s.meal;
+  document.getElementById('barType').value = s.bar;
+  document.getElementById('dayOfWeek').value = s.day;
+  calculateGuest();
+}
+
+function deleteGuest(idx) {
+  let saved = JSON.parse(localStorage.getItem('wbl_guests') || '[]');
+  saved.splice(idx, 1);
+  localStorage.setItem('wbl_guests', JSON.stringify(saved));
+  showSaved();
+}
+
+function exportGuest() {
+  const guests = document.getElementById('guestCount').value;
+  const city = document.getElementById('citySelect').value;
+  const meal = document.getElementById('mealStyle').value;
+  const bar = document.getElementById('barType').value;
+  const day = document.getElementById('dayOfWeek').value;
+  let text = 'PER-GUEST COST ESTIMATE\nGenerated by Wedding Budgetly\n\n';
+  text += 'Guests: '+guests+'\nCity: '+city+'\nMeal: '+meal+'\nBar: '+bar+'\nDay: '+day+'\n';
+  const blob = new Blob([text], {type:'text/plain'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'per-guest-estimate.txt';
+  a.click();
+}
+
+function resetGuest() {
+  document.getElementById('guestCount').value = 100;
+  document.getElementById('citySelect').value = 'national';
+  document.getElementById('mealStyle').value = 'plated';
+  document.getElementById('barType').value = 'open';
+  document.getElementById('dayOfWeek').value = 'saturday';
+  calculateGuest();
+}
+
+function compareGuest() {
+  const guests = document.getElementById('guestCount').value;
+  const meal = document.getElementById('mealStyle').value;
+  const bar = document.getElementById('barType').value;
+  const day = document.getElementById('dayOfWeek').value;
+  const cities = ['national','nyc','la','chicago','portland','austin'];
+  let results = [];
+  cities.forEach(c => {
+    const cm = cityMultipliers[c] || 1.0;
+    const mm = mealMultipliers[meal] || 1.0;
+    const bm = barMultipliers[bar] || 1.0;
+    const dm = dayMultipliers[day] || 1.0;
+    const perGuest = 150 * cm * (mm + bm + 0.25 + 0.35 + 0.2 + 0.18 + 0.1) * dm;
+    results.push({city:c, total:Math.round(perGuest * guests)});
+  });
+  let msg = 'CITY COMPARISON ('+guests+' guests)\n\n';
+  results.forEach(r => msg += r.city+': $'+r.total.toLocaleString()+'\n');
+  alert(msg);
+}
+
+calculateGuest();
+showSaved();
+</script>
+</body>
+</html>
