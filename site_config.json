@@ -1,0 +1,19 @@
+{
+  "site_name": "Wedding Budgetly",
+  "domain": "weddingbudgetly.com",
+  "prefix": "wbl",
+  "description": "Smart wedding budget planning tools and expert advice to help couples plan their dream wedding without financial stress.",
+  "author": "Olivia Bennett",
+  "author_email": "privacy@weddingbudgetly.com",
+  "language": "en",
+  "theme_color": "#C0395B",
+  "secondary_color": "#2C3E50",
+  "accent_color": "#F39C12",
+  "founded_year": 2024,
+  "location": "Portland, Oregon",
+  "social": {
+    "twitter": "@weddingbudgetly",
+    "instagram": "@weddingbudgetly",
+    "pinterest": "weddingbudgetly"
+  }
+}
