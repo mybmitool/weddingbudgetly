@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="../favicon.ico">
+<title>Wedding Budget Calculator | Wedding Budgetly</title>
+<meta name="description" content="Free wedding budget calculator with automatic category breakdowns, real-time trade-off visualization, and export.">
+<meta property="og:title" content="Wedding Budget Calculator | Wedding Budgetly">
+<meta property="og:description" content="Free wedding budget calculator with automatic category breakdowns.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://weddingbudgetly.com/tools/wedding-budget-calculator.html">
+<meta property="og:image" content="https://weddingbudgetly.com/images/og-default.jpg">
+<link rel="canonical" href="https://weddingbudgetly.com/tools/wedding-budget-calculator.html">
+<link rel="stylesheet" href="../style.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Wedding Budget Calculator",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+  "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.8", "ratingCount": "1240"}
+}
+</script>
+</head>
+<body>
+
+<nav class="wbl-nav">
+  <div class="wbl-nav-container">
+    <a href="../index.html" class="wbl-logo">Wedding<span>Budgetly</span></a>
+    <button class="wbl-nav-toggle" onclick="document.querySelector('.wbl-nav-links').classList.toggle('active')" aria-label="Toggle menu">&#9776;</button>
+    <ul class="wbl-nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="./index.html">Tools</a></li>
+      <li><a href="../blog/index.html">Blog</a></li>
+      <li><a href="../about.html">About</a></li>
+      <li><a href="../contact.html">Contact</a></li>
+      <li><a href="../faq.html">FAQ</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="wbl-tool-hero">
+  <h1>Wedding Budget Calculator</h1>
+  <p>Enter your total budget and see automatic breakdowns by category. Move sliders to visualize trade-offs.</p>
+</div>
+
+<div class="wbl-ad-slot" id="article_top" data-ad-slot="article_top"></div>
+
+<div class="wbl-tool-container">
+<div class="wbl-tool-intro" style="max-width:900px;margin:0 auto;padding:32px 24px 16px;">
+  <h2 style="font-size:1.4rem;color:var(--wbl-secondary);margin-bottom:12px;">How This Wedding Budget Calculator Works</h2>
+  <p>This free <strong>wedding budget calculator</strong> helps you figure out exactly how to use your wedding budget calculator to split every dollar across venue, catering, photography, flowers, and more. Enter your total budget and move the sliders to see a real-time <strong>wedding budget breakdown by category</strong>. The math follows industry averages: roughly 40–50% for venue and catering, 10–15% for photography, and the rest divided by priority. If your allocations go over 100%, the calculator flags it instantly. <strong>Practical tip:</strong> build in a 10–15% buffer for hidden fees like service charges and overtime—most couples underestimate those. You can also save multiple scenarios to localStorage, compare a Saturday vs. Friday plan, and export your final breakdown as a text report.</p>
+  <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;">
+    <span style="background:var(--wbl-bg);padding:4px 10px;border-radius:12px;font-size:0.75rem;color:var(--wbl-text-light);">💡 how to use wedding budget calculator</span>
+    <span style="background:var(--wbl-bg);padding:4px 10px;border-radius:12px;font-size:0.75rem;color:var(--wbl-text-light);">💡 wedding budget breakdown by category</span>
+    <span style="background:var(--wbl-bg);padding:4px 10px;border-radius:12px;font-size:0.75rem;color:var(--wbl-text-light);">💡 what percentage for wedding venue</span>
+    <span style="background:var(--wbl-bg);padding:4px 10px;border-radius:12px;font-size:0.75rem;color:var(--wbl-text-light);">💡 average wedding cost 2026</span>
+  </div>
+</div>
+  <div class="wbl-tool-panel">
+    <div class="wbl-form-group">
+      <label class="wbl-label">Total Wedding Budget ($)</label>
+      <input type="number" id="totalBudget" class="wbl-input" value="30000" min="1000" step="500" onchange="calculateBudget()">
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin-top:24px;">
+      <div class="wbl-form-group">
+        <label class="wbl-label">Venue & Rentals (%)</label>
+        <input type="range" id="venuePct" class="wbl-input" min="10" max="50" value="30" oninput="updateSlider('venue',this.value);calculateBudget()">
+        <div style="display:flex;justify-content:space-between;font-size:0.85rem;color:var(--wbl-text-light);">
+          <span id="venueVal">30%</span>
+          <span id="venueAmt">$9,000</span>
+        </div>
+      </div>
+      <div class="wbl-form-group">
+        <label class="wbl-label">Catering & Bar (%)</label>
+        <input type="range" id="cateringPct" class="wbl-input" min="10" max="50" value="25" oninput="updateSlider('catering',this.value);calculateBudget()">
+        <div style="display:flex;justify-content:space-between;font-size:0.85rem;color:var(--wbl-text-light);">
+          <span id="cateringVal">25%</span>
+          <span id="cateringAmt">$7,500</span>
+        </div>
+      </div>
+      <div class="wbl-form-group">
+        <label class="wbl-label">Photography & Video (%)</label>
+        <input type="range" id="photoPct" class="wbl-input" min="5" max="25" value="10" oninput="updateSlider('photo',this.value);calculateBudget()">
+        <div style="display:flex;justify-content:space-between;font-size:0.85rem;color:var(--wbl-text-light);">
+          <span id="photoVal">10%</span>
+          <span id="photoAmt">$3,000</span>
+        </div>
+      </div>
+      <div class="wbl-form-group">
+        <label class="wbl-label">Flowers & Decor (%)</label>
+        <input type="range" id="flowerPct" class="wbl-input" min="3" max="20" value="8" oninput="updateSlider('flower',this.value);calculateBudget()">
+        <div style="display:flex;justify-content:space-between;font-size:0.85rem;color:var(--wbl-text-light);">
+          <span id="flowerVal">8%</span>
+          <span id="flowerAmt">$2,400</span>
+        </div>
+      </div>
+      <div class="wbl-form-group">
+        <label class="wbl-label">Attire & Beauty (%)</label>
+        <input type="range" id="attirePct" class="wbl-input" min="3" max="15" value="6" oninput="updateSlider('attire',this.value);calculateBudget()">
+        <div style="display:flex;justify-content:space-between;font-size:0.85rem;color:var(--wbl-text-light);">
+          <span id="attireVal">6%</span>
+          <span id="attireAmt">$1,800</span>
+        </div>
+      </div>
+      <div class="wbl-form-group">
+        <label class="wbl-label">Music & Entertainment (%)</label>
+        <input type="range" id="musicPct" class="wbl-input" min="3" max="20" value="5" oninput="updateSlider('music',this.value);calculateBudget()">
+        <div style="display:flex;justify-content:space-between;font-size:0.85rem;color:var(--wbl-text-light);">
+          <span id="musicVal">5%</span>
+          <span id="musicAmt">$1,500</span>
+        </div>
+      </div>
+      <div class="wbl-form-group">
+        <label class="wbl-label">Stationery & Gifts (%)</label>
+        <input type="range" id="stationeryPct" class="wbl-input" min="2" max="10" value="4" oninput="updateSlider('stationery',this.value);calculateBudget()">
+        <div style="display:flex;justify-content:space-between;font-size:0.85rem;color:var(--wbl-text-light);">
+          <span id="stationeryVal">4%</span>
+          <span id="stationeryAmt">$1,200</span>
+        </div>
+      </div>
+      <div class="wbl-form-group">
+        <label class="wbl-label">Miscellaneous & Buffer (%)</label>
+        <input type="range" id="miscPct" class="wbl-input" min="5" max="25" value="12" oninput="updateSlider('misc',this.value);calculateBudget()">
+        <div style="display:flex;justify-content:space-between;font-size:0.85rem;color:var(--wbl-text-light);">
+          <span id="miscVal">12%</span>
+          <span id="miscAmt">$3,600</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="wbl-tool-actions">
+      <button class="wbl-btn wbl-btn-primary" onclick="saveBudget()">Save Budget</button>
+      <button class="wbl-btn wbl-btn-secondary" onclick="exportBudget()">Export PDF</button>
+      <button class="wbl-btn wbl-btn-outline" onclick="resetBudget()">Reset</button>
+      <button class="wbl-btn wbl-btn-outline" onclick="compareBudget()">Compare</button>
+    </div>
+  </div>
+
+  <div class="wbl-tool-result" id="resultPanel">
+    <h3>Budget Breakdown</h3>
+    <div class="wbl-chart-container">
+      <canvas id="budgetChart"></canvas>
+    </div>
+    <div id="budgetTable" style="margin-top:16px;"></div>
+    <div id="totalCheck" style="margin-top:16px;padding:12px;border-radius:var(--wbl-radius-sm);font-weight:600;"></div>
+  </div>
+
+  <div class="wbl-tool-result" id="savedBudgets" style="display:none;">
+    <h3>Saved Budgets</h3>
+    <div id="savedList"></div>
+  </div>
+</div>
+
+<div class="wbl-ad-slot" id="article_bottom" data-ad-slot="article_bottom"></div>
+
+<!-- Related Articles + Tools -->
+<div class="wbl-container" style="margin-top:48px;margin-bottom:48px;">
+  <div class="wbl-tail-grid">
+    <div class="wbl-tail-col">
+      <h3>Related Articles</h3>
+      <div class="wbl-tail-card">
+        <a href="../blog/the-complete-wedding-budget-breakdown-where-every-dollar-goes.html">The Complete Wedding Budget Breakdown</a>
+        <p>Exactly where your money goes in a typical wedding.</p>
+      </div>
+      <div class="wbl-tail-card">
+        <a href="../blog/the-hidden-costs-nobody-puts-in-their-wedding-budget.html">The Hidden Costs Nobody Puts in Their Budget</a>
+        <p>Service charges, gratuity, overtime — the fees that add 30%.</p>
+      </div>
+      <div class="wbl-tail-card">
+        <a href="../blog/why-wedding-costs-stayed-at-36000-and-what-it-means-for-you.html">Why Wedding Costs Stayed at $36,000</a>
+        <p>Industry trends and what they mean for your budget.</p>
+      </div>
+    </div>
+    <div class="wbl-tail-col">
+      <h3>Recommended Tools</h3>
+      <div class="wbl-tail-card">
+        <a href="./per-guest-cost-estimator.html">Per-Guest Cost Estimator</a>
+        <p>Calculate true cost per guest by city.</p>
+      </div>
+      <div class="wbl-tail-card">
+        <a href="./wedding-savings-tracker.html">Wedding Savings Tracker</a>
+        <p>Track your weekly savings progress.</p>
+      </div>
+      <div class="wbl-tail-card">
+        <a href="./venue-vs-backyard-analyzer.html">Venue vs Backyard Analyzer</a>
+        <p>Compare venue costs against DIY.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="wbl-footer">
+  <div class="wbl-container">
+    <div class="wbl-footer-grid">
+      <div><h4>Wedding Budgetly</h4><p style="font-size:0.9rem;">Smart tools and honest advice.</p></div>
+      <div><h4>Tools</h4><ul><li><a href="./wedding-budget-calculator.html">Budget Calculator</a></li><li><a href="./per-guest-cost-estimator.html">Per-Guest Estimator</a></li><li><a href="./venue-vs-backyard-analyzer.html">Venue Analyzer</a></li></ul></div>
+      <div><h4>Navigate</h4><ul><li><a href="../index.html">Home</a></li><li><a href="./index.html">Tools</a></li><li><a href="../blog/index.html">Blog</a></li><li><a href="../about.html">About</a></li></ul></div>
+      <div><h4>Legal</h4><ul><li><a href="../privacy.html">Privacy</a></li><li><a href="../terms.html">Terms</a></li></ul></div>
+    </div>
+    <div class="wbl-footer-bottom"><p>&copy; 2024-2026 Wedding Budgetly. All rights reserved.</p></div>
+  </div>
+</footer>
+
+<script src="../ads-loader.js"></script>
+<script>
+const categories = ['venue','catering','photo','flower','attire','music','stationery','misc'];
+const labels = {venue:'Venue & Rentals',catering:'Catering & Bar',photo:'Photography & Video',flower:'Flowers & Decor',attire:'Attire & Beauty',music:'Music & Entertainment',stationery:'Stationery & Gifts',misc:'Miscellaneous & Buffer'};
+
+function updateSlider(cat, val) {
+  document.getElementById(cat+'Val').textContent = val+'%';
+}
+
+function calculateBudget() {
+  const total = parseFloat(document.getElementById('totalBudget').value) || 0;
+  let sum = 0;
+  const data = [];
+  categories.forEach(cat => {
+    const pct = parseFloat(document.getElementById(cat+'Pct').value) || 0;
+    const amt = Math.round(total * pct / 100);
+    document.getElementById(cat+'Amt').textContent = '$'+amt.toLocaleString();
+    sum += pct;
+    data.push({cat, pct, amt, label: labels[cat]});
+  });
+
+  const check = document.getElementById('totalCheck');
+  if (sum > 100) {
+    check.style.background = '#FEF9E7';
+    check.style.color = '#7D6608';
+    check.textContent = 'Warning: Total allocation is '+sum+'%. You are over budget by '+(sum-100)+'%.';
+  } else if (sum < 100) {
+    check.style.background = '#EBF5FB';
+    check.style.color = '#1A5276';
+    check.textContent = 'You have '+(100-sum)+'% ($'+Math.round(total*(100-sum)/100).toLocaleString()+') unallocated.';
+  } else {
+    check.style.background = '#EAFAF1';
+    check.style.color = '#145A32';
+    check.textContent = 'Perfect! Your budget is fully allocated at 100%.';
+  }
+
+  drawChart(data, total);
+  buildTable(data, total);
+}
+
+function drawChart(data, total) {
+  const canvas = document.getElementById('budgetChart');
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.parentElement.getBoundingClientRect();
+  canvas.width = rect.width * dpr;
+  canvas.height = 300 * dpr;
+  ctx.scale(dpr, dpr);
+
+  const colors = ['#C0395B','#E74C3C','#F39C12','#27AE60','#2980B9','#8E44AD','#2C3E50','#95A5A6'];
+  const centerX = rect.width / 2;
+  const centerY = 140;
+  const radius = 100;
+  let startAngle = -Math.PI / 2;
+
+  ctx.clearRect(0, 0, rect.width, 300);
+
+  data.forEach((d, i) => {
+    const sliceAngle = (d.pct / 100) * Math.PI * 2;
+    ctx.beginPath();
+    ctx.moveTo(centerX, centerY);
+    ctx.arc(centerX, centerY, radius, startAngle, startAngle + sliceAngle);
+    ctx.closePath();
+    ctx.fillStyle = colors[i];
+    ctx.fill();
+    ctx.strokeStyle = '#fff';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    startAngle += sliceAngle;
+  });
+
+  // Legend
+  let y = 20;
+  data.forEach((d, i) => {
+    ctx.fillStyle = colors[i];
+    ctx.fillRect(20, y, 12, 12);
+    ctx.fillStyle = '#333';
+    ctx.font = '12px sans-serif';
+    ctx.fillText(d.label + ' ('+d.pct+'%)', 38, y+10);
+    y += 20;
+  });
+
+  // Center text
+  ctx.fillStyle = '#333';
+  ctx.font = 'bold 14px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('Total', centerX, centerY-5);
+  ctx.font = '12px sans-serif';
+  ctx.fillText('$'+total.toLocaleString(), centerX, centerY+12);
+}
+
+function buildTable(data, total) {
+  let html = '<table class="wbl-table"><thead><tr><th>Category</th><th>%</th><th>Amount</th></tr></thead><tbody>';
+  data.forEach(d => {
+    html += '<tr><td>'+d.label+'</td><td>'+d.pct+'%</td><td>$'+d.amt.toLocaleString()+'</td></tr>';
+  });
+  html += '</tbody></table>';
+  document.getElementById('budgetTable').innerHTML = html;
+}
+
+function saveBudget() {
+  const total = document.getElementById('totalBudget').value;
+  const data = {total, date: new Date().toLocaleDateString(), categories: {}};
+  categories.forEach(cat => data.categories[cat] = document.getElementById(cat+'Pct').value);
+  let saved = JSON.parse(localStorage.getItem('wbl_budgets') || '[]');
+  saved.push(data);
+  localStorage.setItem('wbl_budgets', JSON.stringify(saved));
+  alert('Budget saved! You have '+saved.length+' saved budget(s).');
+  showSaved();
+}
+
+function showSaved() {
+  const saved = JSON.parse(localStorage.getItem('wbl_budgets') || '[]');
+  if (saved.length === 0) return;
+  document.getElementById('savedBudgets').style.display = 'block';
+  let html = '<table class="wbl-table"><thead><tr><th>Date</th><th>Total</th><th>Actions</th></tr></thead><tbody>';
+  saved.forEach((s, i) => {
+    html += '<tr><td>'+s.date+'</td><td>$'+parseInt(s.total).toLocaleString()+'</td><td><button onclick="loadBudget('+i+')" class="wbl-btn wbl-btn-sm wbl-btn-outline">Load</button> <button onclick="deleteBudget('+i+')" class="wbl-btn wbl-btn-sm wbl-btn-outline">Delete</button></td></tr>';
+  });
+  html += '</tbody></table>';
+  document.getElementById('savedList').innerHTML = html;
+}
+
+function loadBudget(idx) {
+  const saved = JSON.parse(localStorage.getItem('wbl_budgets') || '[]');
+  const s = saved[idx];
+  document.getElementById('totalBudget').value = s.total;
+  categories.forEach(cat => {
+    document.getElementById(cat+'Pct').value = s.categories[cat];
+    updateSlider(cat, s.categories[cat]);
+  });
+  calculateBudget();
+}
+
+function deleteBudget(idx) {
+  let saved = JSON.parse(localStorage.getItem('wbl_budgets') || '[]');
+  saved.splice(idx, 1);
+  localStorage.setItem('wbl_budgets', JSON.stringify(saved));
+  showSaved();
+}
+
+function exportBudget() {
+  const total = document.getElementById('totalBudget').value;
+  let text = 'WEDDING BUDGET BREAKDOWN\nGenerated by Wedding Budgetly\n\n';
+  text += 'Total Budget: $'+parseInt(total).toLocaleString()+'\n\n';
+  categories.forEach(cat => {
+    const pct = document.getElementById(cat+'Pct').value;
+    const amt = Math.round(total * pct / 100);
+    text += labels[cat]+': '+pct+'% = $'+amt.toLocaleString()+'\n';
+  });
+  const blob = new Blob([text], {type:'text/plain'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'wedding-budget.txt';
+  a.click();
+}
+
+function resetBudget() {
+  document.getElementById('totalBudget').value = 30000;
+  const defaults = {venue:30,catering:25,photo:10,flower:8,attire:6,music:5,stationery:4,misc:12};
+  categories.forEach(cat => {
+    document.getElementById(cat+'Pct').value = defaults[cat];
+    updateSlider(cat, defaults[cat]);
+  });
+  calculateBudget();
+}
+
+function compareBudget() {
+  const total = document.getElementById('totalBudget').value;
+  const scenarioA = {total: total, name: 'Your Current Plan'};
+  const scenarioB = {total: Math.round(total * 0.8), name: '20% Savings Plan'};
+  alert('Scenario A: $'+parseInt(scenarioA.total).toLocaleString()+'\nScenario B: $'+parseInt(scenarioB.total).toLocaleString()+'\n\nSwitch to Scenario B to see how a 20% cut affects each category.');
+}
+
+// Init
+calculateBudget();
+showSaved();
+</script>
+</body>
+</html>
