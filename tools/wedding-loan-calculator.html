@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="../favicon.ico">
+<title>Wedding Loan Calculator | Wedding Budgetly</title>
+<meta name="description" content="See the true cost of wedding loans — total interest, monthly payments, and payoff timeline.">
+<meta property="og:title" content="Wedding Loan Calculator | Wedding Budgetly">
+<meta property="og:description" content="See the true cost of wedding loans with amortization schedule.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://weddingbudgetly.com/tools/wedding-loan-calculator.html">
+<meta property="og:image" content="https://weddingbudgetly.com/images/og-default.jpg">
+<link rel="canonical" href="https://weddingbudgetly.com/tools/wedding-loan-calculator.html">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Wedding Loan Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Web Browser","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+</head>
+<body>
+<nav class="wbl-nav">
+  <div class="wbl-nav-container">
+    <a href="../index.html" class="wbl-logo">Wedding<span>Budgetly</span></a>
+    <button class="wbl-nav-toggle" onclick="document.querySelector('.wbl-nav-links').classList.toggle('active')" aria-label="Toggle menu">&#9776;</button>
+    <ul class="wbl-nav-links">
+      <li><a href="../index.html">Home</a></li><li><a href="./index.html">Tools</a></li><li><a href="../blog/index.html">Blog</a></li><li><a href="../about.html">About</a></li><li><a href="../contact.html">Contact</a></li><li><a href="../faq.html">FAQ</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="wbl-tool-hero" style="background:linear-gradient(135deg,#8E44AD,#C0395B);">
+  <h1>Wedding Loan Calculator</h1>
+  <p>Enter your loan amount, interest rate, and term. See total interest, monthly payments, and amortization.</p>
+</div>
+
+<div class="wbl-ad-slot" id="article_top" data-ad-slot="article_top"></div>
+
+<div class="wbl-tool-container">
+<div class="wbl-tool-intro" style="max-width:900px;margin:0 auto;padding:32px 24px 16px;">
+  <h2 style="font-size:1.4rem;color:var(--wbl-secondary);margin-bottom:12px;">How the Wedding Loan Calculator Works</h2>
+  <p>This <strong>wedding loan calculator</strong> runs the exact amortization math lenders use, showing your monthly payment, total interest, and full payoff timeline. Enter your loan amount, annual interest rate, and term in months. The tool instantly computes the EMI formula and renders a principal-vs-interest pie chart plus a month-by-month amortization table. If you are wondering <strong>how much is a wedding loan</strong> really going to cost, the answer is usually 15–30% more than the principal once interest piles up. <strong>Practical tip:</strong> before you borrow, use the "savings per week" field to see how many weeks of saving would replace the loan entirely. You can also compare 12-, 24-, 36-, 48-, and 60-month terms in one click to find the least painful repayment plan. Export the full schedule to keep your bank account honest.</p>
+  <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;">
+    <span style="background:var(--wbl-bg);padding:4px 10px;border-radius:12px;font-size:0.75rem;color:var(--wbl-text-light);">💡 wedding loan calculator monthly payment</span>
+    <span style="background:var(--wbl-bg);padding:4px 10px;border-radius:12px;font-size:0.75rem;color:var(--wbl-text-light);">💡 how much is a wedding loan</span>
+    <span style="background:var(--wbl-bg);padding:4px 10px;border-radius:12px;font-size:0.75rem;color:var(--wbl-text-light);">💡 personal loan for wedding interest</span>
+    <span style="background:var(--wbl-bg);padding:4px 10px;border-radius:12px;font-size:0.75rem;color:var(--wbl-text-light);">💡 wedding loan amortization schedule</span>
+  </div>
+</div>
+  <div class="wbl-tool-panel">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;">
+      <div class="wbl-form-group">
+        <label class="wbl-label">Loan Amount ($)</label>
+        <input type="number" id="loanAmount" class="wbl-input" value="15000" min="1000" step="500" onchange="calculateLoan()">
+      </div>
+      <div class="wbl-form-group">
+        <label class="wbl-label">Annual Interest Rate (%)</label>
+        <input type="number" id="interestRate" class="wbl-input" value="12" min="1" max="30" step="0.1" onchange="calculateLoan()">
+      </div>
+      <div class="wbl-form-group">
+        <label class="wbl-label">Loan Term (months)</label>
+        <select id="loanTerm" class="wbl-select" onchange="calculateLoan()">
+          <option value="12">12 months</option>
+          <option value="24">24 months</option>
+          <option value="36" selected>36 months</option>
+          <option value="48">48 months</option>
+          <option value="60">60 months</option>
+        </select>
+      </div>
+      <div class="wbl-form-group">
+        <label class="wbl-label">Compare: Savings per Week ($)</label>
+        <input type="number" id="savingsPerWeek" class="wbl-input" value="300" min="50" step="25" onchange="calculateLoan()">
+      </div>
+    </div>
+
+    <div class="wbl-tool-actions">
+      <button class="wbl-btn wbl-btn-primary" onclick="saveLoan()">Save Calculation</button>
+      <button class="wbl-btn wbl-btn-secondary" onclick="exportLoan()">Export Schedule</button>
+      <button class="wbl-btn wbl-btn-outline" onclick="resetLoan()">Reset</button>
+      <button class="wbl-btn wbl-btn-outline" onclick="compareLoan()">Compare Terms</button>
+    </div>
+  </div>
+
+  <div class="wbl-tool-result" id="resultPanel">
+    <h3>Loan Summary</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:24px;">
+      <div style="background:var(--wbl-bg);padding:20px;border-radius:var(--wbl-radius-sm);text-align:center;">
+        <div style="font-size:0.85rem;color:var(--wbl-text-light);margin-bottom:4px;">Monthly Payment</div>
+        <div id="monthlyPayment" style="font-size:1.5rem;font-weight:800;color:var(--wbl-primary);">$498</div>
+      </div>
+      <div style="background:var(--wbl-bg);padding:20px;border-radius:var(--wbl-radius-sm);text-align:center;">
+        <div style="font-size:0.85rem;color:var(--wbl-text-light);margin-bottom:4px;">Total Interest</div>
+        <div id="totalInterest" style="font-size:1.5rem;font-weight:800;color:var(--wbl-accent);">$2,937</div>
+      </div>
+      <div style="background:var(--wbl-bg);padding:20px;border-radius:var(--wbl-radius-sm);text-align:center;">
+        <div style="font-size:0.85rem;color:var(--wbl-text-light);margin-bottom:4px;">Total Paid</div>
+        <div id="totalPaid" style="font-size:1.5rem;font-weight:800;color:var(--wbl-secondary);">$17,937</div>
+      </div>
+      <div style="background:var(--wbl-bg);padding:20px;border-radius:var(--wbl-radius-sm);text-align:center;">
+        <div style="font-size:0.85rem;color:var(--wbl-text-light);margin-bottom:4px;">Time to Save Instead</div>
+        <div id="saveTime" style="font-size:1.5rem;font-weight:800;color:#27AE60;">50 weeks</div>
+      </div>
+    </div>
+
+    <div class="wbl-chart-container">
+      <canvas id="loanChart"></canvas>
+    </div>
+
+    <div id="amortizationTable" style="margin-top:24px;max-height:400px;overflow:auto;"></div>
+  </div>
+
+  <div class="wbl-tool-result" id="savedLoans" style="display:none;">
+    <h3>Saved Calculations</h3>
+    <div id="savedList"></div>
+  </div>
+</div>
+
+<div class="wbl-ad-slot" id="article_bottom" data-ad-slot="article_bottom"></div>
+
+<div class="wbl-container" style="margin-top:48px;margin-bottom:48px;">
+  <div class="wbl-tail-grid">
+    <div class="wbl-tail-col">
+      <h3>Related Articles</h3>
+      <div class="wbl-tail-card"><a href="../blog/wedding-loans-are-a-trap-heres-the-math-and-my-friends-regret.html">Wedding Loans Are a Trap</a><p>The real math behind wedding financing.</p></div>
+      <div class="wbl-tail-card"><a href="../blog/the-psychology-of-wedding-overspending-why-we-cant-stop.html">Psychology of Overspending</a><p>Why we borrow money for weddings we cannot afford.</p></div>
+      <div class="wbl-tail-card"><a href="../blog/the-20k-gen-z-wedding-playbook-smaller-smarter-better.html">Gen Z Wedding Playbook</a><p>How to avoid loans entirely.</p></div>
+    </div>
+    <div class="wbl-tail-col">
+      <h3>Recommended Tools</h3>
+      <div class="wbl-tail-card"><a href="./wedding-savings-tracker.html">Savings Tracker</a><p>Save instead of borrowing.</p></div>
+      <div class="wbl-tail-card"><a href="./wedding-budget-calculator.html">Budget Calculator</a><p>Build a budget you can afford.</p></div>
+      <div class="wbl-tail-card"><a href="./per-guest-cost-estimator.html">Per-Guest Estimator</a><p>Cut guests to cut costs.</p></div>
+    </div>
+  </div>
+</div>
+
+<footer class="wbl-footer">
+  <div class="wbl-container">
+    <div class="wbl-footer-grid">
+      <div><h4>Wedding Budgetly</h4><p style="font-size:0.9rem;">Smart tools and honest advice.</p></div>
+      <div><h4>Tools</h4><ul><li><a href="./wedding-loan-calculator.html">Loan Calculator</a></li><li><a href="./wedding-savings-tracker.html">Savings Tracker</a></li><li><a href="./wedding-budget-calculator.html">Budget Calculator</a></li></ul></div>
+      <div><h4>Navigate</h4><ul><li><a href="../index.html">Home</a></li><li><a href="./index.html">Tools</a></li><li><a href="../blog/index.html">Blog</a></li></ul></div>
+      <div><h4>Legal</h4><ul><li><a href="../privacy.html">Privacy</a></li><li><a href="../terms.html">Terms</a></li></ul></div>
+    </div>
+    <div class="wbl-footer-bottom"><p>&copy; 2024-2026 Wedding Budgetly. All rights reserved.</p></div>
+  </div>
+</footer>
+
+<script src="../ads-loader.js"></script>
+<script>
+function calculateLoan() {
+  const principal = parseFloat(document.getElementById('loanAmount').value) || 15000;
+  const annualRate = parseFloat(document.getElementById('interestRate').value) || 12;
+  const months = parseInt(document.getElementById('loanTerm').value) || 36;
+  const savingsPerWeek = parseFloat(document.getElementById('savingsPerWeek').value) || 300;
+
+  const monthlyRate = annualRate / 100 / 12;
+  const monthlyPayment = principal * (monthlyRate * Math.pow(1 + monthlyRate, months)) / (Math.pow(1 + monthlyRate, months) - 1);
+  const totalPaid = monthlyPayment * months;
+  const totalInterest = totalPaid - principal;
+  const saveWeeks = Math.ceil(principal / savingsPerWeek);
+
+  document.getElementById('monthlyPayment').textContent = '$'+monthlyPayment.toFixed(0);
+  document.getElementById('totalInterest').textContent = '$'+totalInterest.toFixed(0);
+  document.getElementById('totalPaid').textContent = '$'+totalPaid.toFixed(0);
+  document.getElementById('saveTime').textContent = saveWeeks + ' weeks';
+
+  drawLoanChart(principal, totalInterest);
+  buildAmortization(principal, monthlyRate, monthlyPayment, months);
+}
+
+function drawLoanChart(principal, interest) {
+  const canvas = document.getElementById('loanChart');
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.parentElement.getBoundingClientRect();
+  canvas.width = rect.width * dpr;
+  canvas.height = 260 * dpr;
+  ctx.scale(dpr, dpr);
+
+  ctx.clearRect(0, 0, rect.width, 260);
+  const total = principal + interest;
+  const pAngle = (principal / total) * Math.PI * 2;
+  const centerX = rect.width / 2;
+  const centerY = 120;
+  const radius = 90;
+
+  ctx.beginPath();
+  ctx.moveTo(centerX, centerY);
+  ctx.arc(centerX, centerY, radius, -Math.PI/2, -Math.PI/2 + pAngle);
+  ctx.closePath();
+  ctx.fillStyle = '#2980B9';
+  ctx.fill();
+  ctx.strokeStyle = '#fff';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.moveTo(centerX, centerY);
+  ctx.arc(centerX, centerY, radius, -Math.PI/2 + pAngle, -Math.PI/2 + Math.PI*2);
+  ctx.closePath();
+  ctx.fillStyle = '#E74C3C';
+  ctx.fill();
+  ctx.stroke();
+
+  ctx.fillStyle = '#2980B9';
+  ctx.fillRect(20, 20, 12, 12);
+  ctx.fillStyle = '#333';
+  ctx.font = '12px sans-serif';
+  ctx.fillText('Principal: $'+principal.toLocaleString()+' ('+Math.round(principal/total*100)+'%)', 38, 30);
+
+  ctx.fillStyle = '#E74C3C';
+  ctx.fillRect(20, 42, 12, 12);
+  ctx.fillStyle = '#333';
+  ctx.fillText('Interest: $'+interest.toLocaleString()+' ('+Math.round(interest/total*100)+'%)', 38, 52);
+
+  ctx.fillStyle = '#333';
+  ctx.font = 'bold 14px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('Total', centerX, centerY-5);
+  ctx.font = '12px sans-serif';
+  ctx.fillText('$'+total.toLocaleString(), centerX, centerY+12);
+}
+
+function buildAmortization(principal, rate, payment, months) {
+  let balance = principal;
+  let html = '<table class="wbl-table"><thead><tr><th>Month</th><th>Payment</th><th>Principal</th><th>Interest</th><th>Balance</th></tr></thead><tbody>';
+  for (let i = 1; i <= months; i++) {
+    const interest = balance * rate;
+    const principalPaid = payment - interest;
+    balance -= principalPaid;
+    if (balance < 0) balance = 0;
+    html += '<tr><td>'+i+'</td><td>$'+payment.toFixed(2)+'</td><td>$'+principalPaid.toFixed(2)+'</td><td>$'+interest.toFixed(2)+'</td><td>$'+balance.toFixed(2)+'</td></tr>';
+  }
+  html += '</tbody></table>';
+  document.getElementById('amortizationTable').innerHTML = html;
+}
+
+function saveLoan() {
+  const amount = document.getElementById('loanAmount').value;
+  const rate = document.getElementById('interestRate').value;
+  const term = document.getElementById('loanTerm').value;
+  let saved = JSON.parse(localStorage.getItem('wbl_loans') || '[]');
+  saved.push({amount, rate, term, date: new Date().toLocaleDateString()});
+  localStorage.setItem('wbl_loans', JSON.stringify(saved));
+  alert('Calculation saved!');
+  showSaved();
+}
+
+function showSaved() {
+  const saved = JSON.parse(localStorage.getItem('wbl_loans') || '[]');
+  if (saved.length === 0) return;
+  document.getElementById('savedLoans').style.display = 'block';
+  let html = '<table class="wbl-table"><thead><tr><th>Date</th><th>Amount</th><th>Rate</th><th>Term</th><th>Actions</th></tr></thead><tbody>';
+  saved.forEach((s, i) => {
+    html += '<tr><td>'+s.date+'</td><td>$'+s.amount+'</td><td>'+s.rate+'%</td><td>'+s.term+' mo</td><td><button onclick="loadLoan('+i+')" class="wbl-btn wbl-btn-sm wbl-btn-outline">Load</button> <button onclick="deleteLoan('+i+')" class="wbl-btn wbl-btn-sm wbl-btn-outline">Delete</button></td></tr>';
+  });
+  html += '</tbody></table>';
+  document.getElementById('savedList').innerHTML = html;
+}
+
+function loadLoan(idx) {
+  const saved = JSON.parse(localStorage.getItem('wbl_loans') || '[]');
+  const s = saved[idx];
+  document.getElementById('loanAmount').value = s.amount;
+  document.getElementById('interestRate').value = s.rate;
+  document.getElementById('loanTerm').value = s.term;
+  calculateLoan();
+}
+
+function deleteLoan(idx) {
+  let saved = JSON.parse(localStorage.getItem('wbl_loans') || '[]');
+  saved.splice(idx, 1);
+  localStorage.setItem('wbl_loans', JSON.stringify(saved));
+  showSaved();
+}
+
+function exportLoan() {
+  const amount = document.getElementById('loanAmount').value;
+  const rate = document.getElementById('interestRate').value;
+  const term = document.getElementById('loanTerm').value;
+  let text = 'WEDDING LOAN CALCULATION\nGenerated by Wedding Budgetly\n\n';
+  text += 'Amount: $'+amount+'\nRate: '+rate+'%\nTerm: '+term+' months\n';
+  const blob = new Blob([text], {type:'text/plain'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'loan-calculation.txt';
+  a.click();
+}
+
+function resetLoan() {
+  document.getElementById('loanAmount').value = 15000;
+  document.getElementById('interestRate').value = 12;
+  document.getElementById('loanTerm').value = 36;
+  document.getElementById('savingsPerWeek').value = 300;
+  calculateLoan();
+}
+
+function compareLoan() {
+  const amount = parseFloat(document.getElementById('loanAmount').value) || 15000;
+  const rate = parseFloat(document.getElementById('interestRate').value) || 12;
+  const terms = [12, 24, 36, 48, 60];
+  let msg = 'TERM COMPARISON ($'+amount.toLocaleString()+' at '+rate+'%)\n\n';
+  terms.forEach(t => {
+    const mr = rate / 100 / 12;
+    const mp = amount * (mr * Math.pow(1 + mr, t)) / (Math.pow(1 + mr, t) - 1);
+    const tp = mp * t;
+    const ti = tp - amount;
+    msg += t+' months: $'+mp.toFixed(0)+'/mo, $'+ti.toFixed(0)+' interest\n';
+  });
+  alert(msg);
+}
+
+calculateLoan();
+showSaved();
+</script>
+</body>
+</html>
