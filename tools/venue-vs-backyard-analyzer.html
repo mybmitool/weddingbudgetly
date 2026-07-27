@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="../favicon.ico">
+<title>Venue vs Backyard Analyzer | Wedding Budgetly</title>
+<meta name="description" content="Compare traditional wedding venue costs against DIY backyard setup with hidden fees exposed.">
+<meta property="og:title" content="Venue vs Backyard Analyzer | Wedding Budgetly">
+<meta property="og:description" content="Compare venue vs backyard wedding costs with hidden fees exposed.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://weddingbudgetly.com/tools/venue-vs-backyard-analyzer.html">
+<meta property="og:image" content="https://weddingbudgetly.com/images/og-default.jpg">
+<link rel="canonical" href="https://weddingbudgetly.com/tools/venue-vs-backyard-analyzer.html">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Venue vs Backyard Analyzer","applicationCategory":"FinanceApplication","operatingSystem":"Web Browser","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+</head>
+<body>
+<nav class="wbl-nav">
+  <div class="wbl-nav-container">
+    <a href="../index.html" class="wbl-logo">Wedding<span>Budgetly</span></a>
+    <button class="wbl-nav-toggle" onclick="document.querySelector('.wbl-nav-links').classList.toggle('active')" aria-label="Toggle menu">&#9776;</button>
+    <ul class="wbl-nav-links">
+      <li><a href="../index.html">Home</a></li><li><a href="./index.html">Tools</a></li><li><a href="../blog/index.html">Blog</a></li><li><a href="../about.html">About</a></li><li><a href="../contact.html">Contact</a></li><li><a href="../faq.html">FAQ</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="wbl-tool-hero" style="background:linear-gradient(135deg,#27AE60,#2C3E50);">
+  <h1>Venue vs Backyard Analyzer</h1>
+  <p>Compare traditional venue costs against DIY backyard setup. Hidden fees exposed.</p>
+</div>
+
+<div class="wbl-ad-slot" id="article_top" data-ad-slot="article_top"></div>
+
+<div class="wbl-tool-container">
+<div class="wbl-tool-intro" style="max-width:900px;margin:0 auto;padding:32px 24px 16px;">
+  <h2 style="font-size:1.4rem;color:var(--wbl-secondary);margin-bottom:12px;">How the Venue vs. Backyard Analyzer Works</h2>
+  <p>Deciding between a <strong>venue vs. backyard wedding</strong> is not as simple as "free lawn vs. rental fee." This analyzer pulls in real rental costs—tents, tables, portable bathrooms, generators, lighting, and dance floors—to show you the true all-in price of a DIY backyard setup. On the other side, it loads venue base costs plus hidden fees like coordination charges, cake-cutting fees, and corkage. The result is a side-by-side total that answers the question: <strong>is a backyard wedding cheaper?</strong> <strong>Practical tip:</strong> for guest counts under 75, backyards often win by $5,000–$10,000. For 100+, the gap shrinks because rental costs scale fast. Use the comparison button to model luxury venue vs. standard venue vs. backyard in one click, and save your favorite scenario to localStorage.</p>
+  <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;">
+    <span style="background:var(--wbl-bg);padding:4px 10px;border-radius:12px;font-size:0.75rem;color:var(--wbl-text-light);">💡 venue vs backyard wedding cost</span>
+    <span style="background:var(--wbl-bg);padding:4px 10px;border-radius:12px;font-size:0.75rem;color:var(--wbl-text-light);">💡 is a backyard wedding cheaper</span>
+    <span style="background:var(--wbl-bg);padding:4px 10px;border-radius:12px;font-size:0.75rem;color:var(--wbl-text-light);">💡 hidden costs of backyard wedding</span>
+    <span style="background:var(--wbl-bg);padding:4px 10px;border-radius:12px;font-size:0.75rem;color:var(--wbl-text-light);">💡 wedding venue rental vs DIY</span>
+  </div>
+</div>
+  <div class="wbl-tool-panel">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;">
+      <div class="wbl-form-group">
+        <label class="wbl-label">Guest Count</label>
+        <input type="number" id="guestCount" class="wbl-input" value="100" min="20" max="300" onchange="calculateVenue()">
+      </div>
+      <div class="wbl-form-group">
+        <label class="wbl-label">City</label>
+        <select id="citySelect" class="wbl-select" onchange="calculateVenue()">
+          <option value="1.0">National Average</option>
+          <option value="1.65">New York City</option>
+          <option value="1.45">Los Angeles</option>
+          <option value="1.25">Chicago</option>
+          <option value="1.15">Portland, OR</option>
+          <option value="1.35">Seattle</option>
+          <option value="1.55">San Francisco</option>
+          <option value="1.1">Atlanta</option>
+          <option value="1.05">Dallas</option>
+          <option value="0.95">Phoenix</option>
+          <option value="0.85">Oklahoma City</option>
+        </select>
+      </div>
+      <div class="wbl-form-group">
+        <label class="wbl-label">Venue Type</label>
+        <select id="venueType" class="wbl-select" onchange="calculateVenue()">
+          <option value="standard">Standard Venue</option>
+          <option value="luxury">Luxury Venue</option>
+          <option value="barn">Barn / Rustic</option>
+          <option value="hotel">Hotel Ballroom</option>
+          <option value="park">Public Park</option>
+        </select>
+      </div>
+      <div class="wbl-form-group">
+        <label class="wbl-label">Day of Week</label>
+        <select id="dayOfWeek" class="wbl-select" onchange="calculateVenue()">
+          <option value="1.0">Saturday</option>
+          <option value="0.85">Friday</option>
+          <option value="0.8">Sunday</option>
+          <option value="0.7">Weekday</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="wbl-tool-actions">
+      <button class="wbl-btn wbl-btn-primary" onclick="saveVenue()">Save Comparison</button>
+      <button class="wbl-btn wbl-btn-secondary" onclick="exportVenue()">Export</button>
+      <button class="wbl-btn wbl-btn-outline" onclick="resetVenue()">Reset</button>
+      <button class="wbl-btn wbl-btn-outline" onclick="compareVenue()">Compare Scenarios</button>
+    </div>
+  </div>
+
+  <div class="wbl-tool-result" id="resultPanel">
+    <h3>Side-by-Side Comparison</h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:24px;">
+      <div style="background:linear-gradient(135deg,#fff8f9,#fff);padding:24px;border-radius:var(--wbl-radius);border:2px solid var(--wbl-primary);">
+        <h4 style="color:var(--wbl-primary);margin-bottom:16px;">🏛️ Traditional Venue</h4>
+        <div id="venueBreakdown"></div>
+        <div id="venueTotal" style="margin-top:16px;padding-top:16px;border-top:2px solid var(--wbl-border);font-size:1.3rem;font-weight:700;color:var(--wbl-primary);"></div>
+      </div>
+      <div style="background:linear-gradient(135deg,#f0fff4,#fff);padding:24px;border-radius:var(--wbl-radius);border:2px solid #27AE60;">
+        <h4 style="color:#27AE60;margin-bottom:16px;">🏡 Backyard DIY</h4>
+        <div id="backyardBreakdown"></div>
+        <div id="backyardTotal" style="margin-top:16px;padding-top:16px;border-top:2px solid var(--wbl-border);font-size:1.3rem;font-weight:700;color:#27AE60;"></div>
+      </div>
+    </div>
+    <div class="wbl-chart-container">
+      <canvas id="venueChart"></canvas>
+    </div>
+    <div id="savingsBox" style="margin-top:24px;padding:20px;border-radius:var(--wbl-radius);text-align:center;font-size:1.1rem;font-weight:600;"></div>
+  </div>
+
+  <div class="wbl-tool-result" id="savedComparisons" style="display:none;">
+    <h3>Saved Comparisons</h3>
+    <div id="savedList"></div>
+  </div>
+</div>
+
+<div class="wbl-ad-slot" id="article_bottom" data-ad-slot="article_bottom"></div>
+
+<div class="wbl-container" style="margin-top:48px;margin-bottom:48px;">
+  <div class="wbl-tail-grid">
+    <div class="wbl-tail-col">
+      <h3>Related Articles</h3>
+      <div class="wbl-tail-card"><a href="../blog/venue-wedding-vs-backyard-wedding-the-real-cost-breakdown.html">Venue vs Backyard: Real Cost Breakdown</a><p>The complete math behind both options.</p></div>
+      <div class="wbl-tail-card"><a href="../blog/portlands-best-hiddengem-wedding-venues-under-3000.html">Portland Hidden-Gem Venues Under $3k</a><p>Affordable venues that do not look cheap.</p></div>
+      <div class="wbl-tail-card"><a href="../blog/allinclusive-vs-la-carte-which-wedding-package-wins.html">All-Inclusive vs À La Carte</a><p>Which package actually saves money?</p></div>
+    </div>
+    <div class="wbl-tail-col">
+      <h3>Recommended Tools</h3>
+      <div class="wbl-tail-card"><a href="./wedding-budget-calculator.html">Budget Calculator</a><p>Full budget breakdown by category.</p></div>
+      <div class="wbl-tail-card"><a href="./per-guest-cost-estimator.html">Per-Guest Estimator</a><p>True cost per person by city.</p></div>
+      <div class="wbl-tail-card"><a href="./wedding-savings-tracker.html">Savings Tracker</a><p>Track progress toward your venue budget.</p></div>
+    </div>
+  </div>
+</div>
+
+<footer class="wbl-footer">
+  <div class="wbl-container">
+    <div class="wbl-footer-grid">
+      <div><h4>Wedding Budgetly</h4><p style="font-size:0.9rem;">Smart tools and honest advice.</p></div>
+      <div><h4>Tools</h4><ul><li><a href="./wedding-budget-calculator.html">Budget Calculator</a></li><li><a href="./per-guest-cost-estimator.html">Per-Guest Estimator</a></li><li><a href="./venue-vs-backyard-analyzer.html">Venue Analyzer</a></li></ul></div>
+      <div><h4>Navigate</h4><ul><li><a href="../index.html">Home</a></li><li><a href="./index.html">Tools</a></li><li><a href="../blog/index.html">Blog</a></li></ul></div>
+      <div><h4>Legal</h4><ul><li><a href="../privacy.html">Privacy</a></li><li><a href="../terms.html">Terms</a></li></ul></div>
+    </div>
+    <div class="wbl-footer-bottom"><p>&copy; 2024-2026 Wedding Budgetly. All rights reserved.</p></div>
+  </div>
+</footer>
+
+<script src="../ads-loader.js"></script>
+<script>
+const venueBaseCosts = {standard:8000, luxury:15000, barn:6000, hotel:10000, park:2000};
+const venueExtras = {standard:3000, luxury:5000, barn:2500, hotel:4000, park:6000};
+
+function calculateVenue() {
+  const guests = parseInt(document.getElementById('guestCount').value) || 100;
+  const cityMult = parseFloat(document.getElementById('citySelect').value) || 1.0;
+  const venueType = document.getElementById('venueType').value;
+  const dayMult = parseFloat(document.getElementById('dayOfWeek').value) || 1.0;
+
+  const base = venueBaseCosts[venueType] || 8000;
+  const extras = venueExtras[venueType] || 3000;
+  const venueTotal = Math.round((base + extras) * cityMult * dayMult);
+
+  const venueBreakdown = [
+    {label:'Venue Rental', val:Math.round(base * cityMult * dayMult)},
+    {label:'Tables & Chairs', val:Math.round(800 * cityMult)},
+    {label:'Lighting & Decor', val:Math.round(600 * cityMult)},
+    {label:'Service Charge (20%)', val:Math.round(base * cityMult * dayMult * 0.2)},
+    {label:'Gratuity (18%)', val:Math.round(base * cityMult * dayMult * 0.18)},
+    {label:'Tax (10%)', val:Math.round(base * cityMult * dayMult * 0.1)},
+    {label:'Coordination Fee', val:Math.round(extras * cityMult * 0.3)}
+  ];
+
+  const backyardTotal = Math.round((2000 + guests * 45 + 1500 + 800 + 600 + 400) * cityMult);
+  const backyardBreakdown = [
+    {label:'Tent Rental', val:Math.round(2000 * cityMult)},
+    {label:'Tables & Chairs', val:Math.round(guests * 15 * cityMult)},
+    {label:'Portable Bathrooms', val:Math.round(1500 * cityMult)},
+    {label:'Generator', val:Math.round(800 * cityMult)},
+    {label:'Lighting', val:Math.round(600 * cityMult)},
+    {label:'Dance Floor', val:Math.round(400 * cityMult)},
+    {label:'Cleanup/Coordination', val:Math.round(1000 * cityMult)}
+  ];
+
+  let vHtml = '';
+  venueBreakdown.forEach(d => vHtml += '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--wbl-border);"><span>'+d.label+'</span><span>$'+d.val.toLocaleString()+'</span></div>');
+  document.getElementById('venueBreakdown').innerHTML = vHtml;
+  document.getElementById('venueTotal').textContent = 'Total: $'+venueTotal.toLocaleString();
+
+  let bHtml = '';
+  backyardBreakdown.forEach(d => bHtml += '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--wbl-border);"><span>'+d.label+'</span><span>$'+d.val.toLocaleString()+'</span></div>');
+  document.getElementById('backyardBreakdown').innerHTML = bHtml;
+  document.getElementById('backyardTotal').textContent = 'Total: $'+backyardTotal.toLocaleString();
+
+  const savings = venueTotal - backyardTotal;
+  const box = document.getElementById('savingsBox');
+  if (savings > 0) {
+    box.style.background = '#EAFAF1';
+    box.style.color = '#145A32';
+    box.textContent = '💰 Backyard saves you $'+savings.toLocaleString()+' ('+Math.round(savings/venueTotal*100)+'% less)';
+  } else {
+    box.style.background = '#FEF9E7';
+    box.style.color = '#7D6608';
+    box.textContent = '⚠️ Venue is only $'+Math.abs(savings).toLocaleString()+' more — might be worth it for convenience';
+  }
+
+  drawVenueChart(venueTotal, backyardTotal);
+}
+
+function drawVenueChart(vTotal, bTotal) {
+  const canvas = document.getElementById('venueChart');
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.parentElement.getBoundingClientRect();
+  canvas.width = rect.width * dpr;
+  canvas.height = 260 * dpr;
+  ctx.scale(dpr, dpr);
+
+  ctx.clearRect(0, 0, rect.width, 260);
+  const max = Math.max(vTotal, bTotal);
+  const barWidth = 80;
+  const scale = 180 / max;
+
+  // Venue bar
+  const vH = vTotal * scale;
+  ctx.fillStyle = '#C0395B';
+  ctx.fillRect(rect.width/2 - barWidth - 20, 200 - vH, barWidth, vH);
+  ctx.fillStyle = '#333';
+  ctx.font = 'bold 13px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('Venue', rect.width/2 - barWidth/2 - 20, 225);
+  ctx.fillText('$'+vTotal.toLocaleString(), rect.width/2 - barWidth/2 - 20, 200 - vH - 10);
+
+  // Backyard bar
+  const bH = bTotal * scale;
+  ctx.fillStyle = '#27AE60';
+  ctx.fillRect(rect.width/2 + 20, 200 - bH, barWidth, bH);
+  ctx.fillStyle = '#333';
+  ctx.fillText('Backyard', rect.width/2 + barWidth/2 + 20, 225);
+  ctx.fillText('$'+bTotal.toLocaleString(), rect.width/2 + barWidth/2 + 20, 200 - bH - 10);
+}
+
+function saveVenue() {
+  const guests = document.getElementById('guestCount').value;
+  const city = document.getElementById('citySelect').value;
+  const type = document.getElementById('venueType').value;
+  let saved = JSON.parse(localStorage.getItem('wbl_venues') || '[]');
+  saved.push({guests, city, type, date: new Date().toLocaleDateString()});
+  localStorage.setItem('wbl_venues', JSON.stringify(saved));
+  alert('Comparison saved!');
+  showSaved();
+}
+
+function showSaved() {
+  const saved = JSON.parse(localStorage.getItem('wbl_venues') || '[]');
+  if (saved.length === 0) return;
+  document.getElementById('savedComparisons').style.display = 'block';
+  let html = '<table class="wbl-table"><thead><tr><th>Date</th><th>Guests</th><th>Type</th><th>Actions</th></tr></thead><tbody>';
+  saved.forEach((s, i) => {
+    html += '<tr><td>'+s.date+'</td><td>'+s.guests+'</td><td>'+s.type+'</td><td><button onclick="loadVenue('+i+')" class="wbl-btn wbl-btn-sm wbl-btn-outline">Load</button> <button onclick="deleteVenue('+i+')" class="wbl-btn wbl-btn-sm wbl-btn-outline">Delete</button></td></tr>';
+  });
+  html += '</tbody></table>';
+  document.getElementById('savedList').innerHTML = html;
+}
+
+function loadVenue(idx) {
+  const saved = JSON.parse(localStorage.getItem('wbl_venues') || '[]');
+  const s = saved[idx];
+  document.getElementById('guestCount').value = s.guests;
+  document.getElementById('citySelect').value = s.city;
+  document.getElementById('venueType').value = s.type;
+  calculateVenue();
+}
+
+function deleteVenue(idx) {
+  let saved = JSON.parse(localStorage.getItem('wbl_venues') || '[]');
+  saved.splice(idx, 1);
+  localStorage.setItem('wbl_venues', JSON.stringify(saved));
+  showSaved();
+}
+
+function exportVenue() {
+  const guests = document.getElementById('guestCount').value;
+  const type = document.getElementById('venueType').value;
+  let text = 'VENUE VS BACKYARD COMPARISON\nGenerated by Wedding Budgetly\n\n';
+  text += 'Guests: '+guests+'\nVenue Type: '+type+'\n';
+  const blob = new Blob([text], {type:'text/plain'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'venue-comparison.txt';
+  a.click();
+}
+
+function resetVenue() {
+  document.getElementById('guestCount').value = 100;
+  document.getElementById('citySelect').value = '1.0';
+  document.getElementById('venueType').value = 'standard';
+  document.getElementById('dayOfWeek').value = '1.0';
+  calculateVenue();
+}
+
+function compareVenue() {
+  const types = ['standard','luxury','barn','hotel','park'];
+  const guests = document.getElementById('guestCount').value;
+  const city = parseFloat(document.getElementById('citySelect').value) || 1.0;
+  const day = parseFloat(document.getElementById('dayOfWeek').value) || 1.0;
+  let msg = 'VENUE TYPE COMPARISON ('+guests+' guests)\n\n';
+  types.forEach(t => {
+    const base = venueBaseCosts[t] || 8000;
+    const extras = venueExtras[t] || 3000;
+    const total = Math.round((base + extras) * city * day);
+    msg += t+': $'+total.toLocaleString()+'\n';
+  });
+  alert(msg);
+}
+
+calculateVenue();
+showSaved();
+</script>
+</body>
+</html>
