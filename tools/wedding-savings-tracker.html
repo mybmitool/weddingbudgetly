@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="../favicon.ico">
+<title>Wedding Savings Tracker | Wedding Budgetly</title>
+<meta name="description" content="Track your weekly wedding savings progress with visual charts and localStorage persistence.">
+<meta property="og:title" content="Wedding Savings Tracker | Wedding Budgetly">
+<meta property="og:description" content="Track your wedding savings progress with charts and localStorage.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://weddingbudgetly.com/tools/wedding-savings-tracker.html">
+<meta property="og:image" content="https://weddingbudgetly.com/images/og-default.jpg">
+<link rel="canonical" href="https://weddingbudgetly.com/tools/wedding-savings-tracker.html">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Wedding Savings Tracker","applicationCategory":"FinanceApplication","operatingSystem":"Web Browser","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+</head>
+<body>
+<nav class="wbl-nav">
+  <div class="wbl-nav-container">
+    <a href="../index.html" class="wbl-logo">Wedding<span>Budgetly</span></a>
+    <button class="wbl-nav-toggle" onclick="document.querySelector('.wbl-nav-links').classList.toggle('active')" aria-label="Toggle menu">&#9776;</button>
+    <ul class="wbl-nav-links">
+      <li><a href="../index.html">Home</a></li><li><a href="./index.html">Tools</a></li><li><a href="../blog/index.html">Blog</a></li><li><a href="../about.html">About</a></li><li><a href="../contact.html">Contact</a></li><li><a href="../faq.html">FAQ</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="wbl-tool-hero" style="background:linear-gradient(135deg,#27AE60,#2980B9);">
+  <h1>Wedding Savings Tracker</h1>
+  <p>Set your wedding budget goal, track weekly savings, and watch your progress with visual charts.</p>
+</div>
+
+<div class="wbl-ad-slot" id="article_top" data-ad-slot="article_top"></div>
+
+<div class="wbl-tool-container">
+<div class="wbl-tool-intro" style="max-width:900px;margin:0 auto;padding:32px 24px 16px;">
+  <h2 style="font-size:1.4rem;color:var(--wbl-secondary);margin-bottom:12px;">How the Wedding Savings Tracker Works</h2>
+  <p>This <strong>wedding savings tracker</strong> turns your big-day goal into a weekly chore you can actually stick to. Enter your total wedding budget, what you have already saved, your target wedding date, and a weekly deposit target. The tool calculates exactly how many weeks you have left and what you need to save each week to hit zero remaining. If you are asking <strong>how much to save for wedding per week</strong>, the answer depends on your timeline: a $30,000 wedding with 50 weeks left means $500 a week, but the tracker adjusts automatically if you miss a week or add a lump sum. <strong>Practical tip:</strong> set up automatic weekly transfers from your checking to a dedicated savings account so the money disappears before you can spend it. Every deposit is logged in localStorage with a running total, and you can export a PDF-style report to share with your partner or parents.</p>
+  <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;">
+    <span style="background:var(--wbl-bg);padding:4px 10px;border-radius:12px;font-size:0.75rem;color:var(--wbl-text-light);">💡 wedding savings tracker weekly</span>
+    <span style="background:var(--wbl-bg);padding:4px 10px;border-radius:12px;font-size:0.75rem;color:var(--wbl-text-light);">💡 how much to save for wedding per week</span>
+    <span style="background:var(--wbl-bg);padding:4px 10px;border-radius:12px;font-size:0.75rem;color:var(--wbl-text-light);">💡 wedding savings goal calculator</span>
+    <span style="background:var(--wbl-bg);padding:4px 10px;border-radius:12px;font-size:0.75rem;color:var(--wbl-text-light);">💡 how long to save for wedding</span>
+  </div>
+</div>
+  <div class="wbl-tool-panel">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;">
+      <div class="wbl-form-group">
+        <label class="wbl-label">Wedding Budget Goal ($)</label>
+        <input type="number" id="goalAmount" class="wbl-input" value="30000" min="1000" step="500" onchange="updateTracker()">
+      </div>
+      <div class="wbl-form-group">
+        <label class="wbl-label">Already Saved ($)</label>
+        <input type="number" id="savedAmount" class="wbl-input" value="5000" min="0" step="100" onchange="updateTracker()">
+      </div>
+      <div class="wbl-form-group">
+        <label class="wbl-label">Wedding Date</label>
+        <input type="date" id="weddingDate" class="wbl-input" onchange="updateTracker()">
+      </div>
+      <div class="wbl-form-group">
+        <label class="wbl-label">Weekly Savings Target ($)</label>
+        <input type="number" id="weeklyTarget" class="wbl-input" value="500" min="10" step="25" onchange="updateTracker()">
+      </div>
+    </div>
+
+    <div class="wbl-form-group" style="margin-top:24px;">
+      <label class="wbl-label">Add Weekly Deposit</label>
+      <div style="display:flex;gap:12px;">
+        <input type="number" id="weeklyDeposit" class="wbl-input" value="500" min="0" step="25" style="max-width:200px;">
+        <button class="wbl-btn wbl-btn-primary" onclick="addDeposit()">Add Deposit</button>
+      </div>
+    </div>
+
+    <div class="wbl-tool-actions">
+      <button class="wbl-btn wbl-btn-secondary" onclick="saveTracker()">Save Progress</button>
+      <button class="wbl-btn wbl-btn-secondary" onclick="exportTracker()">Export Report</button>
+      <button class="wbl-btn wbl-btn-outline" onclick="resetTracker()">Reset All</button>
+      <button class="wbl-btn wbl-btn-outline" onclick="compareTracker()">Compare Scenarios</button>
+    </div>
+  </div>
+
+  <div class="wbl-tool-result" id="resultPanel">
+    <h3>Progress Overview</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:24px;">
+      <div style="background:var(--wbl-bg);padding:20px;border-radius:var(--wbl-radius-sm);text-align:center;">
+        <div style="font-size:0.85rem;color:var(--wbl-text-light);margin-bottom:4px;">Goal</div>
+        <div id="displayGoal" style="font-size:1.5rem;font-weight:800;color:var(--wbl-secondary);">$30,000</div>
+      </div>
+      <div style="background:var(--wbl-bg);padding:20px;border-radius:var(--wbl-radius-sm);text-align:center;">
+        <div style="font-size:0.85rem;color:var(--wbl-text-light);margin-bottom:4px;">Saved</div>
+        <div id="displaySaved" style="font-size:1.5rem;font-weight:800;color:#27AE60;">$5,000</div>
+      </div>
+      <div style="background:var(--wbl-bg);padding:20px;border-radius:var(--wbl-radius-sm);text-align:center;">
+        <div style="font-size:0.85rem;color:var(--wbl-text-light);margin-bottom:4px;">Remaining</div>
+        <div id="displayRemaining" style="font-size:1.5rem;font-weight:800;color:var(--wbl-primary);">$25,000</div>
+      </div>
+      <div style="background:var(--wbl-bg);padding:20px;border-radius:var(--wbl-radius-sm);text-align:center;">
+        <div style="font-size:0.85rem;color:var(--wbl-text-light);margin-bottom:4px;">Progress</div>
+        <div id="displayProgress" style="font-size:1.5rem;font-weight:800;color:var(--wbl-accent);">17%</div>
+      </div>
+      <div style="background:var(--wbl-bg);padding:20px;border-radius:var(--wbl-radius-sm);text-align:center;">
+        <div style="font-size:0.85rem;color:var(--wbl-text-light);margin-bottom:4px;">Weeks Left</div>
+        <div id="displayWeeks" style="font-size:1.5rem;font-weight:800;color:var(--wbl-text);">50</div>
+      </div>
+      <div style="background:var(--wbl-bg);padding:20px;border-radius:var(--wbl-radius-sm);text-align:center;">
+        <div style="font-size:0.85rem;color:var(--wbl-text-light);margin-bottom:4px;">Weekly Need</div>
+        <div id="displayWeeklyNeed" style="font-size:1.5rem;font-weight:800;color:var(--wbl-primary);">$500</div>
+      </div>
+    </div>
+
+    <div class="wbl-chart-container">
+      <canvas id="trackerChart"></canvas>
+    </div>
+
+    <div id="depositHistory" style="margin-top:24px;">
+      <h4>Deposit History</h4>
+      <div id="historyTable"></div>
+    </div>
+  </div>
+
+  <div class="wbl-tool-result" id="savedTrackers" style="display:none;">
+    <h3>Saved Trackers</h3>
+    <div id="savedList"></div>
+  </div>
+</div>
+
+<div class="wbl-ad-slot" id="article_bottom" data-ad-slot="article_bottom"></div>
+
+<div class="wbl-container" style="margin-top:48px;margin-bottom:48px;">
+  <div class="wbl-tail-grid">
+    <div class="wbl-tail-col">
+      <h3>Related Articles</h3>
+      <div class="wbl-tail-card"><a href="../blog/wedding-loans-are-a-trap-heres-the-math-and-my-friends-regret.html">Wedding Loans Are a Trap</a><p>Why saving beats borrowing every time.</p></div>
+      <div class="wbl-tail-card"><a href="../blog/the-20k-gen-z-wedding-playbook-smaller-smarter-better.html">Gen Z Wedding Playbook</a><p>Smaller budgets, smarter savings.</p></div>
+      <div class="wbl-tail-card"><a href="../blog/how-to-build-a-wedding-registry-that-pays-for-your-wedding.html">Registry That Pays</a><p>Use gifts to boost your savings.</p></div>
+    </div>
+    <div class="wbl-tail-col">
+      <h3>Recommended Tools</h3>
+      <div class="wbl-tail-card"><a href="./wedding-budget-calculator.html">Budget Calculator</a><p>Set your total budget goal.</p></div>
+      <div class="wbl-tail-card"><a href="./wedding-loan-calculator.html">Loan Calculator</a><p>See what borrowing would cost.</p></div>
+      <div class="wbl-tail-card"><a href="./per-guest-cost-estimator.html">Per-Guest Estimator</a><p>Adjust guest count to fit savings.</p></div>
+    </div>
+  </div>
+</div>
+
+<footer class="wbl-footer">
+  <div class="wbl-container">
+    <div class="wbl-footer-grid">
+      <div><h4>Wedding Budgetly</h4><p style="font-size:0.9rem;">Smart tools and honest advice.</p></div>
+      <div><h4>Tools</h4><ul><li><a href="./wedding-savings-tracker.html">Savings Tracker</a></li><li><a href="./wedding-budget-calculator.html">Budget Calculator</a></li><li><a href="./wedding-loan-calculator.html">Loan Calculator</a></li></ul></div>
+      <div><h4>Navigate</h4><ul><li><a href="../index.html">Home</a></li><li><a href="./index.html">Tools</a></li><li><a href="../blog/index.html">Blog</a></li></ul></div>
+      <div><h4>Legal</h4><ul><li><a href="../privacy.html">Privacy</a></li><li><a href="../terms.html">Terms</a></li></ul></div>
+    </div>
+    <div class="wbl-footer-bottom"><p>&copy; 2024-2026 Wedding Budgetly. All rights reserved.</p></div>
+  </div>
+</footer>
+
+<script src="../ads-loader.js"></script>
+<script>
+let deposits = JSON.parse(localStorage.getItem('wbl_tracker_deposits') || '[]');
+
+function updateTracker() {
+  const goal = parseFloat(document.getElementById('goalAmount').value) || 30000;
+  const saved = parseFloat(document.getElementById('savedAmount').value) || 5000;
+  const weddingDate = document.getElementById('weddingDate').value;
+  const weeklyTarget = parseFloat(document.getElementById('weeklyTarget').value) || 500;
+
+  const remaining = goal - saved;
+  const progress = goal > 0 ? (saved / goal * 100) : 0;
+
+  let weeksLeft = 52;
+  if (weddingDate) {
+    const today = new Date();
+    const wedding = new Date(weddingDate);
+    const diffMs = wedding - today;
+    weeksLeft = Math.max(1, Math.ceil(diffMs / (1000 * 60 * 60 * 24 * 7)));
+  }
+
+  const weeklyNeed = weeksLeft > 0 ? Math.ceil(remaining / weeksLeft) : 0;
+
+  document.getElementById('displayGoal').textContent = '$'+goal.toLocaleString();
+  document.getElementById('displaySaved').textContent = '$'+saved.toLocaleString();
+  document.getElementById('displayRemaining').textContent = '$'+remaining.toLocaleString();
+  document.getElementById('displayProgress').textContent = progress.toFixed(0)+'%';
+  document.getElementById('displayWeeks').textContent = weeksLeft;
+  document.getElementById('displayWeeklyNeed').textContent = '$'+weeklyNeed.toLocaleString();
+
+  drawTrackerChart(goal, saved, remaining);
+  buildHistoryTable();
+
+  const weeklyDeposit = document.getElementById('weeklyDeposit');
+  if (weeklyNeed > 0) weeklyDeposit.value = weeklyNeed;
+}
+
+function drawTrackerChart(goal, saved, remaining) {
+  const canvas = document.getElementById('trackerChart');
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.parentElement.getBoundingClientRect();
+  canvas.width = rect.width * dpr;
+  canvas.height = 280 * dpr;
+  ctx.scale(dpr, dpr);
+
+  ctx.clearRect(0, 0, rect.width, 280);
+
+  // Progress bar
+  const barY = 80;
+  const barH = 40;
+  const barW = rect.width - 80;
+  const progress = goal > 0 ? saved / goal : 0;
+
+  ctx.fillStyle = '#E8E8EF';
+  ctx.fillRect(40, barY, barW, barH);
+  ctx.fillStyle = '#27AE60';
+  ctx.fillRect(40, barY, barW * Math.min(progress, 1), barH);
+
+  ctx.fillStyle = '#333';
+  ctx.font = 'bold 16px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('Saved: $'+saved.toLocaleString()+' / $'+goal.toLocaleString()+' ('+(progress*100).toFixed(0)+'%)', rect.width/2, barY + 60);
+
+  // Mini line chart of deposits
+  if (deposits.length > 1) {
+    let cumulative = parseFloat(document.getElementById('savedAmount').value) || 0;
+    const startCumulative = cumulative;
+    const points = deposits.map((d, i) => {
+      cumulative += d.amount;
+      return {x: 40 + (i / (deposits.length - 1)) * (rect.width - 80), y: 200 - ((cumulative - startCumulative) / (goal - startCumulative)) * 100};
+    });
+
+    ctx.strokeStyle = '#C0395B';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    points.forEach((p, i) => { if (i === 0) ctx.moveTo(p.x, p.y); else ctx.lineTo(p.x, p.y); });
+    ctx.stroke();
+
+    points.forEach(p => {
+      ctx.fillStyle = '#C0395B';
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 4, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    ctx.fillStyle = '#333';
+    ctx.font = '11px sans-serif';
+    ctx.fillText('Deposit trend', 40, 220);
+  }
+}
+
+function addDeposit() {
+  const amount = parseFloat(document.getElementById('weeklyDeposit').value) || 0;
+  if (amount <= 0) return;
+  deposits.push({amount, date: new Date().toLocaleDateString()});
+  localStorage.setItem('wbl_tracker_deposits', JSON.stringify(deposits));
+
+  const currentSaved = parseFloat(document.getElementById('savedAmount').value) || 0;
+  document.getElementById('savedAmount').value = currentSaved + amount;
+  updateTracker();
+  alert('Deposit of $'+amount+' added!');
+}
+
+function buildHistoryTable() {
+  if (deposits.length === 0) {
+    document.getElementById('historyTable').innerHTML = '<p style="color:var(--wbl-text-light);">No deposits yet. Add your first weekly deposit above.</p>';
+    return;
+  }
+  let html = '<table class="wbl-table"><thead><tr><th>Date</th><th>Amount</th><th>Running Total</th></tr></thead><tbody>';
+  let running = parseFloat(document.getElementById('savedAmount').value) || 0;
+  running -= deposits.reduce((a,b)=>a+b.amount,0);
+  deposits.forEach(d => {
+    running += d.amount;
+    html += '<tr><td>'+d.date+'</td><td>$'+d.amount.toLocaleString()+'</td><td>$'+running.toLocaleString()+'</td></tr>';
+  });
+  html += '</tbody></table>';
+  document.getElementById('historyTable').innerHTML = html;
+}
+
+function saveTracker() {
+  const goal = document.getElementById('goalAmount').value;
+  const saved = document.getElementById('savedAmount').value;
+  const date = document.getElementById('weddingDate').value;
+  const target = document.getElementById('weeklyTarget').value;
+  let trackers = JSON.parse(localStorage.getItem('wbl_trackers') || '[]');
+  trackers.push({goal, saved, date, target, deposits: deposits.length, savedDate: new Date().toLocaleDateString()});
+  localStorage.setItem('wbl_trackers', JSON.stringify(trackers));
+  alert('Progress saved!');
+  showSaved();
+}
+
+function showSaved() {
+  const saved = JSON.parse(localStorage.getItem('wbl_trackers') || '[]');
+  if (saved.length === 0) return;
+  document.getElementById('savedTrackers').style.display = 'block';
+  let html = '<table class="wbl-table"><thead><tr><th>Date</th><th>Goal</th><th>Saved</th><th>Deposits</th><th>Actions</th></tr></thead><tbody>';
+  saved.forEach((s, i) => {
+    html += '<tr><td>'+s.savedDate+'</td><td>$'+s.goal+'</td><td>$'+s.saved+'</td><td>'+s.deposits+'</td><td><button onclick="loadTracker('+i+')" class="wbl-btn wbl-btn-sm wbl-btn-outline">Load</button> <button onclick="deleteTracker('+i+')" class="wbl-btn wbl-btn-sm wbl-btn-outline">Delete</button></td></tr>';
+  });
+  html += '</tbody></table>';
+  document.getElementById('savedList').innerHTML = html;
+}
+
+function loadTracker(idx) {
+  const saved = JSON.parse(localStorage.getItem('wbl_trackers') || '[]');
+  const s = saved[idx];
+  document.getElementById('goalAmount').value = s.goal;
+  document.getElementById('savedAmount').value = s.saved;
+  document.getElementById('weddingDate').value = s.date;
+  document.getElementById('weeklyTarget').value = s.target;
+  updateTracker();
+}
+
+function deleteTracker(idx) {
+  let saved = JSON.parse(localStorage.getItem('wbl_trackers') || '[]');
+  saved.splice(idx, 1);
+  localStorage.setItem('wbl_trackers', JSON.stringify(saved));
+  showSaved();
+}
+
+function exportTracker() {
+  const goal = document.getElementById('goalAmount').value;
+  const saved = document.getElementById('savedAmount').value;
+  let text = 'WEDDING SAVINGS TRACKER REPORT\nGenerated by Wedding Budgetly\n\n';
+  text += 'Goal: $'+goal+'\nSaved: $'+saved+'\n\nDeposit History:\n';
+  deposits.forEach(d => { text += d.date+': $'+d.amount+'\n'; });
+  const blob = new Blob([text], {type:'text/plain'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'savings-report.txt';
+  a.click();
+}
+
+function resetTracker() {
+  document.getElementById('goalAmount').value = 30000;
+  document.getElementById('savedAmount').value = 5000;
+  document.getElementById('weddingDate').value = '';
+  document.getElementById('weeklyTarget').value = 500;
+  document.getElementById('weeklyDeposit').value = 500;
+  deposits = [];
+  localStorage.setItem('wbl_tracker_deposits', '[]');
+  updateTracker();
+}
+
+function compareTracker() {
+  const goal = parseFloat(document.getElementById('goalAmount').value) || 30000;
+  const scenarios = [
+    {name:'Conservative ($200/wk)', weekly:200},
+    {name:'Moderate ($500/wk)', weekly:500},
+    {name:'Aggressive ($1000/wk)', weekly:1000},
+    {name:'Side Hustle ($1500/wk)', weekly:1500}
+  ];
+  let msg = 'SAVINGS SCENARIO COMPARISON (Goal: $'+goal.toLocaleString()+')\n\n';
+  scenarios.forEach(s => {
+    const weeks = Math.ceil(goal / s.weekly);
+    const months = (weeks / 4.33).toFixed(1);
+    msg += s.name+': '+weeks+' weeks ('+months+' months)\n';
+  });
+  alert(msg);
+}
+
+// Set default wedding date to 1 year from now
+const nextYear = new Date();
+nextYear.setFullYear(nextYear.getFullYear() + 1);
+document.getElementById('weddingDate').value = nextYear.toISOString().split('T')[0];
+
+updateTracker();
+showSaved();
+</script>
+</body>
+</html>
